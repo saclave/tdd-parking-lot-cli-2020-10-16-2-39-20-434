@@ -3,8 +3,7 @@ package com.oocl.cultivation;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 class ParkingBoyTest {
     private Car car;
@@ -22,10 +21,21 @@ class ParkingBoyTest {
     @Test
     void test_when_parking_boy_parks_car_into_parking_lot_and_returns_parking_ticket() {
         //given
-         parkingBoy = new ParkingBoy(new ParkingLot());
+         parkingBoy = new ParkingBoy(parkingLot);
         //when
         parkingTicket = parkingBoy.parkCar(car);
         //then
         assertNotNull(parkingTicket);
+    }
+
+    @Test
+    void test_when_fetching_car_with_parking_ticket_from_parking_lot(){
+        //given
+        parkingBoy = new ParkingBoy(parkingLot);
+        //when
+        parkingTicket = parkingBoy.parkCar(car);
+        Car fetchCar = parkingBoy.fetch(parkingTicket);
+        //then
+        assertEquals(car, fetchCar);
     }
 }

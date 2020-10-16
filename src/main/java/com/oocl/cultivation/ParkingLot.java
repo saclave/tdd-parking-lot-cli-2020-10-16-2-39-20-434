@@ -6,4 +6,8 @@ public class ParkingLot {
     public ParkingTicket addCar(Car car) {
         return new ParkingTicket();
     }
+
+    public Object getCar(ParkingTicket parkingTicket) {
+        return null;
+    }
 }
