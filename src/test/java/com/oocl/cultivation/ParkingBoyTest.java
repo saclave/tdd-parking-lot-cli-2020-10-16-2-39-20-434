@@ -34,7 +34,7 @@ class ParkingBoyTest {
         parkingBoy = new ParkingBoy(parkingLot);
         //when
         parkingTicket = parkingBoy.parkCar(car);
-        Car fetchCar = parkingBoy.fetch(parkingTicket);
+        Car fetchCar = parkingBoy.fetchTicket(parkingTicket);
         //then
         assertEquals(car, fetchCar);
     }
@@ -47,9 +47,9 @@ class ParkingBoyTest {
 
         //when
         parkingTicket = parkingBoy.parkCar(car);
-        Car fetchCar = parkingBoy.fetch(parkingTicket);
+        Car fetchCar = parkingBoy.fetchTicket(parkingTicket);
         ParkingTicket parkingTicket2 = parkingBoy.parkCar(car2);
-        Car fetchCar2 = parkingBoy.fetch(parkingTicket2);
+        Car fetchCar2 = parkingBoy.fetchTicket(parkingTicket2);
 
         //then
         assertEquals(car, fetchCar);
@@ -61,7 +61,7 @@ class ParkingBoyTest {
         //given
         parkingBoy = new ParkingBoy(parkingLot);
         //when
-        Car fetchCar = parkingBoy.fetch(parkingTicket);
+        Car fetchCar = parkingBoy.fetchTicket(parkingTicket);
         //then
         assertNull(fetchCar);
     }
@@ -72,7 +72,7 @@ class ParkingBoyTest {
         parkingBoy = new ParkingBoy(parkingLot);
         //when
         parkingTicket = parkingBoy.parkCar(null);
-        Car fetchCar = parkingBoy.fetch(parkingTicket);
+        Car fetchCar = parkingBoy.fetchTicket(parkingTicket);
         //then
         assertNull(fetchCar);
     }
@@ -83,8 +83,8 @@ class ParkingBoyTest {
         parkingBoy = new ParkingBoy(parkingLot);
         //when
         parkingTicket = parkingBoy.parkCar(car);
-        Car fetchCar = parkingBoy.fetch(parkingTicket);
-        fetchCar = parkingBoy.fetch(parkingTicket);
+        Car fetchCar = parkingBoy.fetchTicket(parkingTicket);
+        fetchCar = parkingBoy.fetchTicket(parkingTicket);
         //then
         assertNull(fetchCar);
     }
@@ -102,5 +102,18 @@ class ParkingBoyTest {
 
         //then
         assertNull(parkingTicket2);
+    }
+
+    @Test
+    void test_ticket_has_already_been_used_throw_error(){
+        //then
+        assertThrows(UnrecognizedParkingTicketException.class, () -> {
+            //given
+            parkingBoy = new ParkingBoy(parkingLot);
+            //when
+            parkingTicket = parkingBoy.parkCar(car);
+            ParkingTicket fakeTicket = parkingBoy.parkCar(car);
+            parkingBoy.fetchTicket(fakeTicket);
+        });
     }
 }
