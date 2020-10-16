@@ -88,4 +88,20 @@ class ParkingBoyTest {
         //then
         assertNull(fetchCar);
     }
+
+    @Test
+    void test_when_parking_lot_capacity_is_1_when_car_is_parked_already_no_more_additional_car_and_null_ticket(){
+        //given
+        Car car2 = new Car();
+        parkingLot = new ParkingLot(1);
+        parkingBoy = new ParkingBoy(parkingLot);
+
+        //when
+        parkingTicket = parkingBoy.parkCar(car);
+        ParkingTicket parkingTicket2 = parkingBoy.parkCar(car2);
+
+        //then
+        assertNotNull(parkingTicket);
+        assertNull(parkingTicket2);
+    }
 }
