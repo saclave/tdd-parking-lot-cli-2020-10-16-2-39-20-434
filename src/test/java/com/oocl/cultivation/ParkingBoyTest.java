@@ -55,4 +55,15 @@ class ParkingBoyTest {
         assertEquals(car, fetchCar);
         assertEquals(car2, fetchCar2);
     }
+
+    @Test
+    void test_when_wrong_ticket_issued_no_car_is_fetched(){
+        //given
+        parkingBoy = new ParkingBoy(parkingLot);
+        //when
+        parkingTicket = new ParkingTicket();
+        Car fetchCar = parkingBoy.fetch(parkingTicket);
+        //then
+        assertNull(fetchCar);
+    }
 }
