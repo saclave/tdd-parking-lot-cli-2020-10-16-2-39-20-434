@@ -16,6 +16,7 @@ public class ParkingLot {
 
     public Car getCar(ParkingTicket parkingTicket) {
         car = carMap.get(parkingTicket);
+        carMap.remove(parkingTicket);
         return car;
     }
 }
