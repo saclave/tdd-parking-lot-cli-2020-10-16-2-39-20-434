@@ -20,7 +20,11 @@ public class ParkingLot {
     public ParkingTicket issueTicket(Car car) {
         parkingTicket = new ParkingTicket();
         carMap.put(parkingTicket, car);
-        return parkingTicket;
+        return getAvailableParkingLotSpace() < 0 ? parkingTicket : null;
+    }
+
+    private int getAvailableParkingLotSpace() {
+        return carMap.size() - size;
     }
 
     public Car getCar(ParkingTicket parkingTicket) {
