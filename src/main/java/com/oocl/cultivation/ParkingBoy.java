@@ -10,11 +10,11 @@ public class ParkingBoy {
     }
 
     public ParkingTicket parkCar(Car car) {
-        return parkingLot.addCar(car);
+        return parkingLot.issueTicket(car);
     }
 
     public Car fetch(ParkingTicket parkingTicket) {
         car = (Car) parkingLot.getCar(parkingTicket);
-        return null;
+        return car;
     }
 }
