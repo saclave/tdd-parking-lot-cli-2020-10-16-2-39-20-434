@@ -18,6 +18,8 @@ public class ServiceManagerTest {
     private ParkingLot parkingLot3;
     private Car car = new Car();
     private ServiceManager serviceManager = new ServiceManager();
+    private static final int PARK = 1;
+    private static final int FETCH = 0;
 
     @BeforeEach
     void setup(){
@@ -35,7 +37,7 @@ public class ServiceManagerTest {
     }
 
     @Test
-    void test_to_specify_which_parking_boy_can_park_car_by_service_manager(){
+    void test_to_specify_which_parking_boy_can_park_car_by_service_manager() throws ParkingSystemException {
         //given
         parkingLot1 = new ParkingLot(1,0);
         parkingLot2 = new ParkingLot(2, 0);
@@ -44,10 +46,12 @@ public class ServiceManagerTest {
                 (parkingBoy1, parkingBoy2, parkingBoy3));
 
         parkingBoy1.setMultipleParkingLots(new ArrayList<>(asList(parkingLot1, parkingLot2, parkingLot3)));
-        serviceManager.setManagementList(parkingBoyArrayList));
+        serviceManager.setManagementList(parkingBoyArrayList);
 
-        assertNotNull(serviceManager.assignParkingBoy(1, car, parkingBoy1));
+        assertNotNull(serviceManager.assignParkingBoy(PARK, car, parkingBoy1, parkingLot1));
     }
+
+    
 }
 
 //AC1. The parking lot service manager can add parking boys to management list.
