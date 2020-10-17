@@ -4,7 +4,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import static java.util.Arrays.asList;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -18,8 +17,6 @@ public class ServiceManagerTest {
     private ParkingLot parkingLot3;
     private Car car = new Car();
     private ServiceManager serviceManager = new ServiceManager();
-    private static final int PARK = 1;
-    private static final int FETCH = 0;
 
     @BeforeEach
     void setup(){
@@ -45,13 +42,34 @@ public class ServiceManagerTest {
         ArrayList<ParkingBoy> parkingBoyArrayList = new ArrayList<>(asList
                 (parkingBoy1, parkingBoy2, parkingBoy3));
 
+        //when
         parkingBoy1.setMultipleParkingLots(new ArrayList<>(asList(parkingLot1, parkingLot2, parkingLot3)));
         serviceManager.setManagementList(parkingBoyArrayList);
 
-        assertNotNull(serviceManager.assignParkingBoy(PARK, car, parkingBoy1, parkingLot1));
+        //then
+        assertNotNull(serviceManager.assignParkingBoyToPark(car, parkingBoy1, parkingLot1));
     }
 
-    
+    @Test
+    void test_to_specify_which_parking_boy_can_fetch_car_by_service_manager() throws ParkingSystemException {
+        //given
+        parkingLot1 = new ParkingLot(1,0);
+        parkingLot2 = new ParkingLot(2, 0);
+        parkingLot3 = new ParkingLot(3, 0);
+        ArrayList<ParkingBoy> parkingBoyArrayList = new ArrayList<>(asList
+                (parkingBoy1, parkingBoy2, parkingBoy3));
+
+        //when
+        parkingBoy1.setMultipleParkingLots(new ArrayList<>(asList(parkingLot1, parkingLot2, parkingLot3)));
+        parkingBoy2.setMultipleParkingLots(new ArrayList<>(asList(parkingLot1)));
+        serviceManager.setManagementList(parkingBoyArrayList);
+        ParkingTicket parkingTicket = serviceManager.assignParkingBoyToPark(car, parkingBoy1, parkingLot1);
+
+        //then
+        assertNotNull(serviceManager.assignParkBoyToFetch(parkingTicket, parkingBoy2, parkingLot1));
+    }
+
+
 }
 
 //AC1. The parking lot service manager can add parking boys to management list.
