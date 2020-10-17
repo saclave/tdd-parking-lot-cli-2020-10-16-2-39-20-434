@@ -13,8 +13,15 @@ public class ParkingBoy {
         return parkingLot.issueTicket(car);
     }
 
-    public Car fetchTicket(ParkingTicket parkingTicket) {
+    public Car fetchTicket(ParkingTicket parkingTicket) throws UnrecognizedParkingTicketException {
+        if(isTicketValid(parkingTicket)){
+            throw new UnrecognizedParkingTicketException("Unrecognized parking ticket.");
+        }
         car = parkingLot.getCar(parkingTicket);
         return car;
+    }
+
+    private boolean isTicketValid(ParkingTicket parkingTicket) {
+        return parkingTicket == null;
     }
 }

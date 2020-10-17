@@ -29,7 +29,7 @@ class ParkingBoyTest {
     }
 
     @Test
-    void test_when_fetching_car_with_parking_ticket_from_parking_lot(){
+    void test_when_fetching_car_with_parking_ticket_from_parking_lot() throws UnrecognizedParkingTicketException {
         //given
         parkingBoy = new ParkingBoy(parkingLot);
         //when
@@ -40,7 +40,7 @@ class ParkingBoyTest {
     }
 
     @Test
-    void test_when_2_cars_parked_2_cars_fetched_from_parking_ticket_by_parking_boy(){
+    void test_when_2_cars_parked_2_cars_fetched_from_parking_ticket_by_parking_boy() throws UnrecognizedParkingTicketException {
         //given
         Car car2 = new Car();
         parkingBoy = new ParkingBoy(parkingLot);
@@ -57,7 +57,7 @@ class ParkingBoyTest {
     }
 
     @Test
-    void test_when_wrong_ticket_issued_no_car_is_fetched(){
+    void test_when_wrong_ticket_issued_no_car_is_fetched() throws UnrecognizedParkingTicketException {
         //given
         parkingBoy = new ParkingBoy(parkingLot);
         //when
@@ -67,7 +67,7 @@ class ParkingBoyTest {
     }
 
     @Test
-    void test_when_no_ticket_return_null_car(){
+    void test_when_no_ticket_return_null_car() throws UnrecognizedParkingTicketException {
         //given
         parkingBoy = new ParkingBoy(parkingLot);
         //when
@@ -78,7 +78,7 @@ class ParkingBoyTest {
     }
 
     @Test
-    void test_when_ticket_is_used_return_null_car(){
+    void test_when_ticket_is_used_return_null_car() throws UnrecognizedParkingTicketException {
         //given
         parkingBoy = new ParkingBoy(parkingLot);
         //when
@@ -111,9 +111,8 @@ class ParkingBoyTest {
             //given
             parkingBoy = new ParkingBoy(parkingLot);
             //when
-            parkingTicket = parkingBoy.parkCar(car);
-            ParkingTicket fakeTicket = parkingBoy.parkCar(car);
-            parkingBoy.fetchTicket(fakeTicket);
+            parkingTicket = null;
+            parkingBoy.fetchTicket(parkingTicket);
         });
     }
 }
