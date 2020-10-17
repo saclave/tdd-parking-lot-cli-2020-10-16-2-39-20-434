@@ -15,7 +15,7 @@ class ParkingBoyTest {
     void setup(){
         car = new Car();
         parkingLot = new ParkingLot();
-        parkingTicket = new ParkingTicket();
+        parkingTicket = new ParkingTicket(true, false);
     }
 
     @Test
@@ -61,7 +61,7 @@ class ParkingBoyTest {
         //given
         parkingBoy = new ParkingBoy(parkingLot);
         //when
-        Car fetchCar = parkingBoy.fetchCar(parkingTicket);
+        Car fetchCar = parkingBoy.fetchCar(new ParkingTicket());
         //then
         assertNull(fetchCar);
     }
@@ -117,7 +117,7 @@ class ParkingBoyTest {
     }
 
     @Test
-    void test_when_given_wrong_ticket_throw_error() throws UnrecognizedParkingTicketException {
+    void test_when_given_wrong_ticket_throw_error() {
         //then
         assertThrows(UnrecognizedParkingTicketException.class, () -> {
             //given
@@ -125,7 +125,7 @@ class ParkingBoyTest {
         parkingTicket = new ParkingTicket(true, false);
 
         //when
-        boolean isTicketVald = parkingBoy.checkTicket(parkingTicket);
+        boolean isTicketValid = parkingBoy.checkTicket(parkingTicket);
         parkingBoy.fetchCar(parkingTicket);
         });
     }

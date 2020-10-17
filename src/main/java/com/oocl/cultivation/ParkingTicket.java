@@ -1,10 +1,23 @@
 package com.oocl.cultivation;
 
 public class ParkingTicket {
-    public ParkingTicket(){
+    private boolean isUsed;
+    private boolean isProvided;
+
+    public ParkingTicket(boolean isProvided, boolean isUsed){
+        this.isUsed = isUsed;
+        this.isProvided = isProvided;
+    }
+
+    public ParkingTicket() {
 
     }
 
-    public ParkingTicket(boolean b, boolean b1) {
+    public boolean isProvided() {
+        return isUsed;
+    }
+
+    public boolean isUsed() {
+        return isProvided;
     }
 }

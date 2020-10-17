@@ -14,14 +14,28 @@ public class ParkingBoy {
     }
 
     public Car fetchCar(ParkingTicket parkingTicket) throws UnrecognizedParkingTicketException {
-        if(isTicketValid(parkingTicket)){
+        if(checkTicket(parkingTicket)){
             throw new UnrecognizedParkingTicketException("Unrecognized parking ticket.");
         }
         car = parkingLot.getCar(parkingTicket);
         return car;
     }
 
-    private boolean isTicketValid(ParkingTicket parkingTicket) {
+    private boolean isNoTicket(ParkingTicket parkingTicket) {
         return parkingTicket == null;
+    }
+
+    public boolean checkTicket(ParkingTicket parkingTicket) {
+        if(isNoTicket(parkingTicket)){
+            return true;
+        }
+        else if(parkingTicket.isProvided() && parkingTicket.isUsed()){
+            return true;
+        }
+        else if(!parkingTicket.isProvided() && parkingTicket.isUsed()){
+            return true;
+        }else{
+            return false;
+        }
     }
 }

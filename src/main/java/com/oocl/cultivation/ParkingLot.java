@@ -19,6 +19,7 @@ public class ParkingLot {
 
     public ParkingTicket issueTicket(Car car) {
         parkingTicket = new ParkingTicket();
+
         carMap.put(parkingTicket, car);
         return getAvailableParkingLotSpace() < 0 ? parkingTicket : null;
     }
