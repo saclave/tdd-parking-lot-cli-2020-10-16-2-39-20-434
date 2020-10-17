@@ -14,9 +14,7 @@ public class ParkingBoy {
     }
 
     public Car fetchCar(ParkingTicket parkingTicket) throws ParkingTicketException {
-        if(checkTicket(parkingTicket)){
-            throw new ParkingTicketException("Unrecognized parking ticket.");
-        }
+        checkTicket(parkingTicket);
         car = parkingLot.getCar(parkingTicket);
         return car;
     }
@@ -25,17 +23,13 @@ public class ParkingBoy {
         return parkingTicket == null;
     }
 
-    public boolean checkTicket(ParkingTicket parkingTicket) {
-        if(isNoTicket(parkingTicket)){
-            return true;
-        }
-        else if(parkingTicket.isProvided() && parkingTicket.isUsed()){
-            return true;
-        }
-        else if(!parkingTicket.isProvided() && parkingTicket.isUsed()){
-            return true;
-        }else{
-            return false;
+    public void checkTicket(ParkingTicket parkingTicket) throws ParkingTicketException {
+        if (isNoTicket(parkingTicket)) {
+            throw new ParkingTicketException("Please provide your parking ticket.");
+        } else if (parkingTicket.isProvided() && parkingTicket.isUsed()) {
+            throw new ParkingTicketException("Unrecognized parking ticket.");
+        } else if (!parkingTicket.isProvided() && parkingTicket.isUsed()) {
+            throw new ParkingTicketException("Unrecognized parking ticket.");
         }
     }
 }
