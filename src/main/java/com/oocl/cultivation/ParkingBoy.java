@@ -9,11 +9,16 @@ public class ParkingBoy {
         this.parkingLot = parkingLot;
     }
 
-    public ParkingTicket parkCar(Car car) {
-        return parkingLot.issueTicket(car);
+    public ParkingTicket parkCar(Car car) throws ParkingSystemException {
+        parkingTicket = parkingLot.issueTicket(car);
+
+        if(parkingTicket == null) {
+            throw new ParkingSystemException("Not enough position");
+        }
+        return parkingTicket;
     }
 
-    public Car fetchCar(ParkingTicket parkingTicket) throws ParkingTicketException {
+    public Car fetchCar(ParkingTicket parkingTicket) throws ParkingSystemException {
         checkTicket(parkingTicket);
         car = parkingLot.getCar(parkingTicket);
         return car;
@@ -23,13 +28,13 @@ public class ParkingBoy {
         return parkingTicket == null;
     }
 
-    public void checkTicket(ParkingTicket parkingTicket) throws ParkingTicketException {
+    public void checkTicket(ParkingTicket parkingTicket) throws ParkingSystemException {
         if (isNoTicket(parkingTicket)) {
-            throw new ParkingTicketException("Please provide your parking ticket.");
+            throw new ParkingSystemException("Please provide your parking ticket.");
         } else if (parkingTicket.isProvided() && parkingTicket.isUsed()) {
-            throw new ParkingTicketException("Unrecognized parking ticket.");
+            throw new ParkingSystemException("Unrecognized parking ticket.");
         } else if (!parkingTicket.isProvided() && parkingTicket.isUsed()) {
-            throw new ParkingTicketException("Unrecognized parking ticket.");
+            throw new ParkingSystemException("Unrecognized parking ticket.");
         }
     }
 }

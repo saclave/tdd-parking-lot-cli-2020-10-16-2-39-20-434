@@ -24,6 +24,14 @@ public class ParkingLot {
         this.numCarsParked = numCarsParked;
     }
 
+    public int getLotSize(){
+        return lotSize;
+    }
+
+    public int getNumCarsParked(){
+        return numCarsParked;
+    }
+
     public ParkingTicket issueTicket(Car car) {
         parkingTicket = new ParkingTicket();
 
@@ -42,6 +50,6 @@ public class ParkingLot {
     }
 
     public boolean isLotFull() {
-        return false;
+        return this.numCarsParked > this.lotSize;
     }
 }
