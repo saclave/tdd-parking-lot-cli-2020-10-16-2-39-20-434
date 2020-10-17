@@ -200,4 +200,24 @@ class ParkingBoyTest {
         //then
         assertArrayEquals(carsParkedPerLot, smartParkingBoy.getParkingLotCount());
     }
+
+    //Story 5
+    @Test
+    void test_when_super_smart_parking_boy_parks_multiple_cars_in_multiple_parking_lots() throws ParkingSystemException {
+        //Given
+        SuperSmartParkingBoy superSmartParkingBoy = new SuperSmartParkingBoy();
+        ArrayList<Car> carArrayList = new ArrayList<>(asList(new Car(), new Car(), new Car()));
+        ArrayList<ParkingLot> parkingLotArrayList = new ArrayList<>(asList(
+                new ParkingLot(3, 0),
+                new ParkingLot(5, 0),
+                new ParkingLot(3, 0)));
+
+        //when
+        superSmartParkingBoy.setMultipleParkingLots(parkingLotArrayList);
+        superSmartParkingBoy.parkMultipleCars(carArrayList);
+        int carsParkedPerLot[] = {0, 3, 0};
+
+        //then
+        assertArrayEquals(carsParkedPerLot, superSmartParkingBoy.getParkingLotCount());
+    }
 }
