@@ -29,7 +29,7 @@ class ParkingBoyTest {
     }
 
     @Test
-    void test_when_fetching_car_with_parking_ticket_from_parking_lot() throws ParkingTicketException {
+    void test_when_fetching_car_with_parking_ticket_from_parking_lot() throws ParkingSystemException {
         //given
         parkingBoy = new ParkingBoy(parkingLot);
         //when
@@ -40,7 +40,7 @@ class ParkingBoyTest {
     }
 
     @Test
-    void test_when_2_cars_parked_2_cars_fetched_from_parking_ticket_by_parking_boy() throws ParkingTicketException {
+    void test_when_2_cars_parked_2_cars_fetched_from_parking_ticket_by_parking_boy() throws ParkingSystemException {
         //given
         Car car2 = new Car();
         parkingBoy = new ParkingBoy(parkingLot);
@@ -57,7 +57,7 @@ class ParkingBoyTest {
     }
 
     @Test
-    void test_when_wrong_ticket_issued_no_car_is_fetched() throws ParkingTicketException {
+    void test_when_wrong_ticket_issued_no_car_is_fetched() throws ParkingSystemException {
         //given
         parkingBoy = new ParkingBoy(parkingLot);
         //when
@@ -67,7 +67,7 @@ class ParkingBoyTest {
     }
 
     @Test
-    void test_when_no_ticket_return_null_car() throws ParkingTicketException {
+    void test_when_no_ticket_return_null_car() throws ParkingSystemException {
         //given
         parkingBoy = new ParkingBoy(parkingLot);
         //when
@@ -78,7 +78,7 @@ class ParkingBoyTest {
     }
 
     @Test
-    void test_when_ticket_is_used_return_null_car() throws ParkingTicketException {
+    void test_when_ticket_is_used_return_null_car() throws ParkingSystemException {
         //given
         parkingBoy = new ParkingBoy(parkingLot);
         //when
@@ -107,7 +107,7 @@ class ParkingBoyTest {
     @Test
     void test_when_no_ticket_provided_throw_error(){
         //then
-        assertThrows(ParkingTicketException.class, () -> {
+        assertThrows(ParkingSystemException.class, () -> {
             //given
             parkingBoy = new ParkingBoy(parkingLot);
             //when
@@ -119,7 +119,7 @@ class ParkingBoyTest {
     @Test
     void test_when_given_wrong_ticket_throw_error() {
         //then
-        assertThrows(ParkingTicketException.class, () -> {
+        assertThrows(ParkingSystemException.class, () -> {
             //given
         parkingBoy = new ParkingBoy(parkingLot);
         parkingTicket = new ParkingTicket(true, false);
@@ -133,7 +133,7 @@ class ParkingBoyTest {
     @Test
     void test_when_customer_does_not_provide_parking_ticket(){
         //then
-        assertThrows(ParkingTicketException.class, () -> {
+        assertThrows(ParkingSystemException.class, () -> {
         //given
         parkingBoy = new ParkingBoy(parkingLot);
         parkingTicket = null;
@@ -141,6 +141,21 @@ class ParkingBoyTest {
         //when
         parkingBoy.checkTicket(parkingTicket);
         parkingBoy.fetchCar(parkingTicket);
+        });
+    }
+
+    @Test
+    void test_when_parking_lot_is_full_throw_full_capacity(){
+        //then
+        assertThrows(ParkingSystemException.class, () -> {
+        //given
+        parkingLot = new ParkingLot(1, 1);
+        parkingBoy = new ParkingBoy(parkingLot);
+
+        //when
+            car = new Car();
+            parkingBoy.parkCar(car);
+             parkingLot.isLotFull();
         });
     }
 }
