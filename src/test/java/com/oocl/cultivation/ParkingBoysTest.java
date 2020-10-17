@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import static java.util.Arrays.asList;
 import static org.junit.jupiter.api.Assertions.*;
 
-class ParkingBoyTest {
+class ParkingBoysTest {
     private Car car;
     private ParkingLot parkingLot;
     private ParkingBoy parkingBoy;
