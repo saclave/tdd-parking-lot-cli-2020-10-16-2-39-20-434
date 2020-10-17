@@ -94,8 +94,23 @@ public class ServiceManagerTest {
         serviceManager.setMultipleParkingLots(new ArrayList<>(asList(parkingLot1, parkingLot2)));
 
         //then
-        assertNotNull(serviceManager.parkCar(car));
+        assertNotNull(serviceManager.parkCar(car, parkingLot1));
     }
+
+    @Test
+    void test_park_car_by_service_manager_not_from_managed_parking_lot() throws ParkingSystemException {
+        //given
+        parkingLot1 = new ParkingLot(1,0);
+        parkingLot2 = new ParkingLot(2, 0);
+
+        //when
+        serviceManager.setMultipleParkingLots(new ArrayList<>(asList(parkingLot2)));
+
+        //then
+        assertNull(serviceManager.parkCar(car, parkingLot1));
+    }
+
+
 }
 
 //AC1. The parking lot service manager can add parking boys to management list.
