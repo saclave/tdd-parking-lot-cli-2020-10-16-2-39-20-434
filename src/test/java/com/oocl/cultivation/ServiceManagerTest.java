@@ -6,8 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 
 import static java.util.Arrays.asList;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ServiceManagerTest {
     private ParkingBoy parkingBoy1 = new ParkingBoy();
@@ -85,6 +84,18 @@ public class ServiceManagerTest {
         assertNull(serviceManager.assignParkingBoyToPark(car, parkingBoy3, parkingLot1));
     }
 
+    @Test
+    void test_park_car_by_service_manager_from_managed_parking_lot() throws ParkingSystemException {
+        //given
+        parkingLot1 = new ParkingLot(1,0);
+        parkingLot2 = new ParkingLot(2, 0);
+
+        //when
+        serviceManager.setMultipleParkingLots(new ArrayList<>(asList(parkingLot1, parkingLot2)));
+
+        //then
+        assertNotNull(serviceManager.parkCar(car));
+    }
 }
 
 //AC1. The parking lot service manager can add parking boys to management list.
