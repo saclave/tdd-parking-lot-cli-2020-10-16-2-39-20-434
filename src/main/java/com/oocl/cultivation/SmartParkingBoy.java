@@ -8,5 +8,21 @@ public class SmartParkingBoy extends ParkingBoy{
 
     @Override
     public ArrayList<ParkingTicket> parkMultipleCars(ArrayList<Car> carArrayList) throws ParkingSystemException {
+        parkIntoMultipleLots();
+        if(temp > 0){
+            this.checkParkingLot().get(ctr).setParkedCarCount();
+            this.parkCar(carArrayList.get(carArrayList.size()-1));
+        }
+
+        return parkingLot.getParkingTickets(carArrayList);
+    }
+
+    private void parkIntoMultipleLots() {
+        for(ParkingLot lot : this.checkParkingLot()){
+            if(temp < lot.getRemainingSlots()){
+                temp = lot.getRemainingSlots();
+                ctr += 1;
+            }
+        }
     }
 }
