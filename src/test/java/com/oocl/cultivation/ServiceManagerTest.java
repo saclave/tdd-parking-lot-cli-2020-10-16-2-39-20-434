@@ -109,6 +109,25 @@ public class ServiceManagerTest {
         //then
         assertNull(serviceManager.parkCar(car, parkingLot1));
     }
-    
+
+    @Test
+    void test_when_park_of_parking_boy_throw_error_from_wrong_ticket(){
+        //then
+        assertThrows(ParkingSystemException.class, () -> {
+            //given
+            parkingLot1 = new ParkingLot(1, 0);
+            parkingLot2 = new ParkingLot(2, 0);
+            parkingLot3 = new ParkingLot(3, 0);
+            ArrayList<ParkingBoy> parkingBoyArrayList = new ArrayList<>(asList
+                    (parkingBoy1, parkingBoy2, parkingBoy3));
+
+            //when
+            parkingBoy1.setMultipleParkingLots(new ArrayList<>(asList(parkingLot1, parkingLot2, parkingLot3)));
+            parkingBoy2.setMultipleParkingLots(new ArrayList<>(asList(parkingLot1)));
+            serviceManager.setManagementList(parkingBoyArrayList);
+            ParkingTicket parkingTicket = new ParkingTicket(true, true);
+            serviceManager.assignParkBoyToFetch(parkingTicket, parkingBoy2, parkingLot1);
+        });
+    }
 }
 
