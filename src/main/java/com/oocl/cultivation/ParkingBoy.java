@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class ParkingBoy {
     public ParkingLot parkingLot;
-    private ParkingTicket parkingTicket;
+    public ParkingTicket parkingTicket;
     private Car car;
     private ArrayList<ParkingLot> parkingLotArrayList;
 
@@ -28,7 +28,7 @@ public class ParkingBoy {
         return parkingTicket;
     }
 
-    private ParkingLot findAvailableParkingLot() {
+    public ParkingLot findAvailableParkingLot() {
         for(ParkingLot parkingLot : parkingLotArrayList){
             if(!parkingLot.isFull()){
                 return parkingLot;

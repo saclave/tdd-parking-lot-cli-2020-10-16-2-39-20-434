@@ -44,4 +44,24 @@ public class ServiceManager extends ParkingBoy{
         }
         return null;
     }
+
+    public ParkingTicket parkCar(Car car, ParkingLot parkingLot) throws ParkingSystemException {
+        if(isParkingLotOwnedByServiceManager(this, parkingLot)) {
+            parkingLot = super.findAvailableParkingLot();
+            if (parkingLot == null) {
+                throw new ParkingSystemException("Not enough position");
+            }
+            super.parkingTicket = parkingLot.issueTicket(car);
+
+            return parkingTicket;
+        }
+        else {
+            return null;
+        }
+    }
+
+    private boolean isParkingLotOwnedByServiceManager(ServiceManager serviceManager, ParkingLot parkingLot) {
+        return serviceManager.getParkingLot().stream()
+                .anyMatch(lot -> lot == parkingLot);
+    }
 }

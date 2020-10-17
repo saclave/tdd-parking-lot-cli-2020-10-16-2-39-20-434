@@ -109,10 +109,6 @@ public class ServiceManagerTest {
         //then
         assertNull(serviceManager.parkCar(car, parkingLot1));
     }
-
-
+    
 }
 
-//AC1. The parking lot service manager can add parking boys to management list.
-// And the parking lot manager can specify a parking boy on the list to park or fetch the car
-// (only from the parking lots managed by that parking boy).
