@@ -19,12 +19,22 @@ public class ParkingBoy {
     }
 
     public ParkingTicket parkCar(Car car) throws ParkingSystemException {
-        parkingTicket = parkingLot.issueTicket(car);
-
-        if(parkingTicket == null) {
+        parkingLot = findAvailableParkingLot();
+        if (parkingLot == null) {
             throw new ParkingSystemException("Not enough position");
         }
+        parkingTicket = parkingLot.issueTicket(car);
+
         return parkingTicket;
+    }
+
+    private ParkingLot findAvailableParkingLot() {
+        for(ParkingLot parkingLot : parkingLotArrayList){
+            if(!parkingLot.isFull()){
+                return parkingLot;
+            }
+        }
+        return null;
     }
 
     public ArrayList<ParkingTicket> parkMultipleCars(ArrayList<Car> carArrayList) throws ParkingSystemException {
@@ -32,12 +42,21 @@ public class ParkingBoy {
             parkIntoMultipleLots(car);
         }
         if(carArrayList.size() > 0){
-            this.checkParkingLot();
+            this.checkIfFull(getParkingLot().get(0));
         }
         return parkingLot.getParkingTickets(carArrayList);
     }
 
-    public ArrayList<ParkingLot> checkParkingLot() {
+    public boolean checkIfFull(ParkingLot parkingLot) throws ParkingSystemException {
+        if(parkingLot.isFull){
+            throw new ParkingSystemException("Not enough position.");
+        }
+        else{
+            return false;
+        }
+    }
+
+    public ArrayList<ParkingLot> getParkingLot() {
         return parkingLotArrayList;
     }
 
@@ -53,8 +72,13 @@ public class ParkingBoy {
 
     public Car fetchCar(ParkingTicket parkingTicket) throws ParkingSystemException {
         checkTicket(parkingTicket);
-        car = parkingLot.getCar(parkingTicket);
-        return car;
+        for(ParkingLot parkingLot : parkingLotArrayList){
+            for(Car car : parkingLot.getCars()){
+                car = parkingLot.getCar(parkingTicket);
+                return car;
+            }
+        }
+        throw new ParkingSystemException("Unrecognized parking ticket.");
     }
 
     public void checkTicket(ParkingTicket parkingTicket) throws ParkingSystemException {

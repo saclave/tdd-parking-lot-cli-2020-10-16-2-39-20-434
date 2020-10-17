@@ -14,10 +14,10 @@ public class ParkingTicket {
     }
 
     public boolean isProvided() {
-        return isUsed;
+        return isProvided;
     }
 
     public boolean isUsed() {
-        return isProvided;
+        return isUsed;
     }
 }
