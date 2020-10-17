@@ -10,6 +10,7 @@ public class ParkingLot {
     private ParkingTicket parkingTicket;
     private Car car;
     private Map<ParkingTicket, Car> carMap = new HashMap<>();
+    private boolean IsFull = false;
 
     public ParkingLot(int size) {
         this.size = size;
@@ -22,14 +23,6 @@ public class ParkingLot {
     public ParkingLot(int lotSize, int numCarsParked) {
         this.lotSize = lotSize;
         this.numCarsParked = numCarsParked;
-    }
-
-    public int getLotSize(){
-        return lotSize;
-    }
-
-    public int getNumCarsParked(){
-        return numCarsParked;
     }
 
     public ParkingTicket issueTicket(Car car) {
@@ -49,7 +42,21 @@ public class ParkingLot {
         return car;
     }
 
-    public boolean isLotFull() {
-        return this.numCarsParked > this.lotSize;
+    public int getRemainingSlots() {
+        return lotSize - numCarsParked;
+    }
+
+    public void setParkedCarCount() {
+        if(this.numCarsParked == this.lotSize){
+            this.IsFull = true;
+        }
+        else{
+            numCarsParked += 1;
+            lotSize -= 1;
+        }
+    }
+
+    public int getNumCarsParked(){
+        return numCarsParked;
     }
 }

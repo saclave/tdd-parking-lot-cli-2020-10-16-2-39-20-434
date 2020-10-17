@@ -3,12 +3,19 @@ package com.oocl.cultivation;
 import java.util.ArrayList;
 
 public class ParkingBoy {
-    private final ParkingLot parkingLot;
+    private ParkingLot parkingLot;
     private ParkingTicket parkingTicket;
     private Car car;
+    private ArrayList<ParkingLot> parkingLotArrayList;
 
     public ParkingBoy(ParkingLot parkingLot) {
         this.parkingLot = parkingLot;
+        this.parkingLotArrayList = new ArrayList<>();
+        this.parkingLotArrayList.add(parkingLot);
+    }
+
+    public ParkingBoy() {
+        this(new ParkingLot());
     }
 
     public ParkingTicket parkCar(Car car) throws ParkingSystemException {
@@ -18,6 +25,30 @@ public class ParkingBoy {
             throw new ParkingSystemException("Not enough position");
         }
         return parkingTicket;
+    }
+
+    public ParkingTicket parkMultipleCars(ArrayList<Car> carArrayList) throws ParkingSystemException {
+        for(Car car : carArrayList){
+            parkIntoMultipleLots(car);
+        }
+        if(carArrayList.size() > 0){
+            this.checkParkingLot();
+        }
+        return parkingTicket;
+    }
+
+    private ArrayList<ParkingLot> checkParkingLot() {
+        return parkingLotArrayList;
+    }
+
+    private void parkIntoMultipleLots(Car car) throws ParkingSystemException {
+        for(ParkingLot lot : parkingLotArrayList){
+            if(lot.getRemainingSlots() > 0){
+                lot.setParkedCarCount();
+                this.parkCar(car);
+                break;
+            }
+        }
     }
 
     public Car fetchCar(ParkingTicket parkingTicket) throws ParkingSystemException {
@@ -36,10 +67,17 @@ public class ParkingBoy {
         }
     }
 
-    public void setMultipleParkingLots(ArrayList<ParkingLot> parkingLotArrayList) {
+    public ParkingBoy setMultipleParkingLots(ArrayList<ParkingLot> parkingLotArrayList) {
+        this.parkingLotArrayList = parkingLotArrayList;
+        return this;
     }
 
     public int[] getParkingLotCount() {
-        return new int[]{0};
+        int[] lotSpace = new int[parkingLotArrayList.size()];
+        for(int size = 0; size < parkingLotArrayList.size(); size++){
+            lotSpace[size] = parkingLotArrayList.get(size).getNumCarsParked();
+        }
+        return lotSpace;
     }
+
 }

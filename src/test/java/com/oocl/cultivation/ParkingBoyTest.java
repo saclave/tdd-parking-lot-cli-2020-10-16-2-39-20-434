@@ -93,8 +93,9 @@ class ParkingBoyTest {
     }
 
     @Test
-    void test_when_parking_lot_capacity_is_1_when_car_is_parked_already_no_more_additional_car_and_null_ticket()
-            throws ParkingSystemException {
+    void test_when_parking_lot_capacity_is_1_when_car_is_parked_already_no_more_additional_car_and_null_ticket() {
+        //then
+        assertThrows(ParkingSystemException.class, () -> {
         //given
         Car car2 = new Car();
         parkingLot = new ParkingLot(1);
@@ -103,9 +104,7 @@ class ParkingBoyTest {
         //when
         parkingBoy.parkCar(car);
         ParkingTicket parkingTicket2 = parkingBoy.parkCar(car2);
-
-        //then
-        assertNull(parkingTicket2);
+        });
     }
 
     @Test
@@ -164,15 +163,17 @@ class ParkingBoyTest {
     }
 
     @Test
-    void test_when_2_parking_lots_for_not_smart_parking_boy(){
+    void test_when_2_parking_lots_for_not_smart_parking_boy() throws ParkingSystemException {
         //given
+        ParkingBoy parkingBoy = new ParkingBoy();
         ArrayList<Car> carArrayList = new ArrayList<>(Arrays.asList(new Car(), new Car(), new Car()));
-        ArrayList<ParkingLot> parkingLotArrayList = new ArrayList<>(Arrays.asList(new ParkingLot(2),
-                new ParkingLot(2)));
+        ArrayList<ParkingLot> parkingLotArrayList = new ArrayList<>(Arrays.asList(
+                new ParkingLot(1, 0), new ParkingLot(3, 0)));
 
         //when
         parkingBoy.setMultipleParkingLots(parkingLotArrayList);
-        int parkedCarsSize[] = {2, 1};
+        parkingBoy.parkMultipleCars(carArrayList);
+        int parkedCarsSize[] = {1, 2};
 
         //then
         assertArrayEquals(parkedCarsSize, parkingBoy.getParkingLotCount());
