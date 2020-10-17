@@ -131,7 +131,7 @@ public class ServiceManagerTest {
     }
 
     @Test
-    void test_when_parking_lot_capacity_is_1_when_car_is_parked_already_no_more_additional_car_and_null_ticket() {
+    void test_when_parking_lot_capacity_is_1_when_car_is_parked_already_throw_error() {
         //then
         assertThrows(ParkingSystemException.class, () -> {
             //given
@@ -146,6 +146,23 @@ public class ServiceManagerTest {
 
             serviceManager.assignParkingBoyToPark(car, parkingBoy1, parkingLot1);
             serviceManager.parkCar(car, parkingLot1);
+        });
+    }
+
+    @Test
+    void test_when_no_ticket_provided_throw_error(){
+        //then
+        assertThrows(ParkingSystemException.class, () -> {
+            //given
+            parkingLot1 = new ParkingLot(1, 0);
+            ArrayList<ParkingBoy> parkingBoyArrayList = new ArrayList<>(asList
+                    (parkingBoy1, parkingBoy2, parkingBoy3));
+
+            //when
+            parkingBoy1.setMultipleParkingLots(new ArrayList<>(asList(parkingLot1)));
+            serviceManager.setManagementList(parkingBoyArrayList);
+
+            serviceManager.assignParkBoyToFetch(null, parkingBoy1, parkingLot1);
         });
     }
 }
