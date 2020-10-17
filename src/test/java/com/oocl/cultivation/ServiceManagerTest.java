@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import static java.util.Arrays.asList;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class ServiceManagerTest {
     private ParkingBoy parkingBoy1 = new ParkingBoy();
@@ -69,6 +70,20 @@ public class ServiceManagerTest {
         assertNotNull(serviceManager.assignParkBoyToFetch(parkingTicket, parkingBoy2, parkingLot1));
     }
 
+    @Test
+    void test_service_manager_give_no_ticket_if_parking_boy_to_park_is_not_in_management_list() throws ParkingSystemException {
+        //given
+        parkingLot1 = new ParkingLot(1,0);
+        ArrayList<ParkingBoy> parkingBoyArrayList = new ArrayList<>(asList
+                (parkingBoy1, parkingBoy2));
+
+        //when
+        parkingBoy3.setMultipleParkingLots(new ArrayList<>(asList(parkingLot1)));
+        serviceManager.setManagementList(parkingBoyArrayList);
+
+        //then
+        assertNull(serviceManager.assignParkingBoyToPark(car, parkingBoy3, parkingLot1));
+    }
 
 }
 
