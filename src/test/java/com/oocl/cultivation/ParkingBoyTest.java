@@ -4,8 +4,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
+import static java.util.Arrays.asList;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ParkingBoyTest {
@@ -107,6 +107,7 @@ class ParkingBoyTest {
         });
     }
 
+    //Story 2
     @Test
     void test_when_no_ticket_provided_throw_error(){
         //then
@@ -162,13 +163,14 @@ class ParkingBoyTest {
         });
     }
 
+    //Story 3
     @Test
     void test_when_2_parking_lots_for_not_smart_parking_boy() throws ParkingSystemException {
         //given
         ParkingBoy parkingBoy = new ParkingBoy();
-        ArrayList<Car> carArrayList = new ArrayList<>(Arrays.asList(new Car(), new Car(), new Car()));
-        ArrayList<ParkingLot> parkingLotArrayList = new ArrayList<>(Arrays.asList(
-                new ParkingLot(1, 0), new ParkingLot(3, 0)));
+        ArrayList<Car> carArrayList = new ArrayList<>(asList(new Car(), new Car(), new Car()));
+        ArrayList<ParkingLot> parkingLotArrayList = new ArrayList<>(asList(new ParkingLot
+                (1, 0), new ParkingLot(3, 0)));
 
         //when
         parkingBoy.setMultipleParkingLots(parkingLotArrayList);
@@ -177,5 +179,24 @@ class ParkingBoyTest {
 
         //then
         assertArrayEquals(parkedCarsSize, parkingBoy.getParkingLotCount());
+    }
+
+    //Story 4
+    @Test
+    void test_when_smart_parking_boy_parks_multiple_cars_in_multiple_parking_lots() throws ParkingSystemException {
+        //Given
+        SmartParkingBoy smartParkingBoy = new SmartParkingBoy();
+        ArrayList<Car> carArrayList = new ArrayList<>(asList(new Car(), new Car(), new Car()));
+        ArrayList<ParkingLot> parkingLotArrayList = new ArrayList<>(asList(new ParkingLot
+                (1, 0), new ParkingLot(1, 0),
+                new ParkingLot(2, 0)));
+
+        //when
+        smartParkingBoy.setMultipleParkingLots(parkingLotArrayList);
+        smartParkingBoy.parkMultipleCars(carArrayList);
+        int parkedCarSize[] = {0, 0, 1};
+
+        //then
+        assertArrayEquals(parkedCarSize, smartParkingBoy.getParkingLotCount());
     }
 }

@@ -1,5 +1,8 @@
 package com.oocl.cultivation;
 
+import sun.security.krb5.internal.Ticket;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -58,5 +61,14 @@ public class ParkingLot {
 
     public int getNumCarsParked(){
         return numCarsParked;
+    }
+
+    public ArrayList<ParkingTicket> getParkingTickets(ArrayList<Car> carArrayList) {
+        ArrayList<ParkingTicket> ticketArrayList = new ArrayList<>();
+        for(int ticket=0; ticket < carArrayList.size(); ticket++){
+            ticketArrayList.add(new ParkingTicket());
+        }
+
+        return ticketArrayList;
     }
 }

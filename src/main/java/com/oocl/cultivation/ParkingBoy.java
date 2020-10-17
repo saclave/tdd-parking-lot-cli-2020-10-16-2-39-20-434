@@ -3,7 +3,7 @@ package com.oocl.cultivation;
 import java.util.ArrayList;
 
 public class ParkingBoy {
-    private ParkingLot parkingLot;
+    public ParkingLot parkingLot;
     private ParkingTicket parkingTicket;
     private Car car;
     private ArrayList<ParkingLot> parkingLotArrayList;
@@ -27,17 +27,17 @@ public class ParkingBoy {
         return parkingTicket;
     }
 
-    public ParkingTicket parkMultipleCars(ArrayList<Car> carArrayList) throws ParkingSystemException {
+    public ArrayList<ParkingTicket> parkMultipleCars(ArrayList<Car> carArrayList) throws ParkingSystemException {
         for(Car car : carArrayList){
             parkIntoMultipleLots(car);
         }
         if(carArrayList.size() > 0){
             this.checkParkingLot();
         }
-        return parkingTicket;
+        return parkingLot.getParkingTickets(carArrayList);
     }
 
-    private ArrayList<ParkingLot> checkParkingLot() {
+    public ArrayList<ParkingLot> checkParkingLot() {
         return parkingLotArrayList;
     }
 
