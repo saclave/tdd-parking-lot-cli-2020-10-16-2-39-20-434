@@ -1,7 +1,5 @@
 package com.oocl.cultivation;
 
-import sun.security.krb5.internal.Ticket;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -13,7 +11,6 @@ public class ParkingLot {
     private ParkingTicket parkingTicket;
     private Car car;
     private Map<ParkingTicket, Car> carMap = new HashMap<>();
-    private boolean IsFull = false;
 
     public ParkingLot(int size) {
         this.size = size;
@@ -51,7 +48,7 @@ public class ParkingLot {
 
     public void setParkedCarCount() {
         if(this.numCarsParked == this.lotSize){
-            this.IsFull = true;
+            return;
         }
         else{
             numCarsParked += 1;

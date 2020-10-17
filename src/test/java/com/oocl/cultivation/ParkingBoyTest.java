@@ -170,15 +170,15 @@ class ParkingBoyTest {
         ParkingBoy parkingBoy = new ParkingBoy();
         ArrayList<Car> carArrayList = new ArrayList<>(asList(new Car(), new Car(), new Car()));
         ArrayList<ParkingLot> parkingLotArrayList = new ArrayList<>(asList(new ParkingLot
-                (1, 0), new ParkingLot(3, 0)));
+                (3, 0), new ParkingLot(3, 0)));
 
         //when
         parkingBoy.setMultipleParkingLots(parkingLotArrayList);
         parkingBoy.parkMultipleCars(carArrayList);
-        int parkedCarsSize[] = {1, 2};
+        int carsParkedPerLot[] = {2, 1};
 
         //then
-        assertArrayEquals(parkedCarsSize, parkingBoy.getParkingLotCount());
+        assertArrayEquals(carsParkedPerLot, parkingBoy.getParkingLotCount());
     }
 
     //Story 4
@@ -187,16 +187,17 @@ class ParkingBoyTest {
         //Given
         SmartParkingBoy smartParkingBoy = new SmartParkingBoy();
         ArrayList<Car> carArrayList = new ArrayList<>(asList(new Car(), new Car(), new Car()));
-        ArrayList<ParkingLot> parkingLotArrayList = new ArrayList<>(asList(new ParkingLot
-                (1, 0), new ParkingLot(1, 0),
-                new ParkingLot(2, 0)));
+        ArrayList<ParkingLot> parkingLotArrayList = new ArrayList<>(asList(
+                new ParkingLot(3, 0),
+                new ParkingLot(5, 0),
+                new ParkingLot(3, 0)));
 
         //when
         smartParkingBoy.setMultipleParkingLots(parkingLotArrayList);
         smartParkingBoy.parkMultipleCars(carArrayList);
-        int parkedCarSize[] = {0, 0, 1};
+        int carsParkedPerLot[] = {0, 3, 0};
 
         //then
-        assertArrayEquals(parkedCarSize, smartParkingBoy.getParkingLotCount());
+        assertArrayEquals(carsParkedPerLot, smartParkingBoy.getParkingLotCount());
     }
 }
