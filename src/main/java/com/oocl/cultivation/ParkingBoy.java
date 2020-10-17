@@ -13,9 +13,9 @@ public class ParkingBoy {
         return parkingLot.issueTicket(car);
     }
 
-    public Car fetchCar(ParkingTicket parkingTicket) throws UnrecognizedParkingTicketException {
+    public Car fetchCar(ParkingTicket parkingTicket) throws ParkingTicketException {
         if(checkTicket(parkingTicket)){
-            throw new UnrecognizedParkingTicketException("Unrecognized parking ticket.");
+            throw new ParkingTicketException("Unrecognized parking ticket.");
         }
         car = parkingLot.getCar(parkingTicket);
         return car;
