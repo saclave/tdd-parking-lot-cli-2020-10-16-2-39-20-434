@@ -3,6 +3,9 @@ package com.oocl.cultivation;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class ParkingBoyTest {
@@ -148,13 +151,30 @@ class ParkingBoyTest {
     @Test
     void test_when_parking_lot_is_full_throw_full_capacity(){
         //then
-        assertThrows(ParkingSystemException.class, () -> {//given
+        assertThrows(ParkingSystemException.class, () -> {
+            //given
             Car car2 = new Car();
             parkingLot = new ParkingLot(1);
             parkingBoy = new ParkingBoy(parkingLot);
 
             //when
             parkingBoy.parkCar(car);
+            parkingBoy.parkCar(car2);
         });
+    }
+
+    @Test
+    void test_when_2_parking_lots_for_not_smart_parking_boy(){
+        //given
+        ArrayList<Car> carArrayList = new ArrayList<>(Arrays.asList(new Car(), new Car(), new Car()));
+        ArrayList<ParkingLot> parkingLotArrayList = new ArrayList<>(Arrays.asList(new ParkingLot(2),
+                new ParkingLot(2)));
+
+        //when
+        parkingBoy.setMultipleParkingLots(parkingLotArrayList);
+        int parkedCarsSize[] = {2, 1};
+
+        //then
+        assertArrayEquals(parkedCarsSize, parkingBoy.getParkingLotCount());
     }
 }
