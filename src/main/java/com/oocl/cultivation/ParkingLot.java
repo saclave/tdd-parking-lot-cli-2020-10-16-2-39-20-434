@@ -7,11 +7,9 @@ import java.util.Map;
 
 public class ParkingLot {
     private ArrayList<Car> carArrayList;
-    private int numCarsParked;
     private int size;
-    private ParkingTicket parkingTicket;
     private Car car;
-    private Map<ParkingTicket, Car> carMap = new HashMap<>();
+    private Map<ParkingTicket, Car> ticketCarMap = new HashMap<>();
 
     public ParkingLot(int size) {
         this.carArrayList = new ArrayList<>();
@@ -22,16 +20,10 @@ public class ParkingLot {
         this(10);
     }
 
-    public ParkingLot(int lotSize, int numCarsParked) {
-        this.size = lotSize;
-        this.numCarsParked = numCarsParked;
-        this.carArrayList = new ArrayList<>();
-    }
-
     public ParkingTicket issueTicket(Car car) {
-        parkingTicket = new ParkingTicket(true, false);
+        ParkingTicket parkingTicket = new ParkingTicket(true, false);
 
-        carMap.put(parkingTicket, car);
+        ticketCarMap.put(parkingTicket, car);
         parkCar(car);
         return getAvailableParkingLotSpace() >= 0 ? parkingTicket : null;
     }
@@ -41,12 +33,12 @@ public class ParkingLot {
     }
 
     private int getAvailableParkingLotSpace() {
-        return size - carMap.size();
+        return size - ticketCarMap.size();
     }
 
     public Car getCar(ParkingTicket parkingTicket) {
-        car = carMap.get(parkingTicket);
-        carMap.remove(parkingTicket);
+        car = ticketCarMap.get(parkingTicket);
+        ticketCarMap.remove(parkingTicket);
         removeCar(car);
         return car;
     }
@@ -55,34 +47,12 @@ public class ParkingLot {
         carArrayList.remove(car);
     }
 
-    public int getRemainingSlots() {
-        return size - numCarsParked;
-    }
-
-    public void setParkedCarCount() {
-        if(this.numCarsParked == this.size){
-            return;
-        }
-        else{
-            numCarsParked += 1;
-        }
-    }
-
-    public int getNumCarsParked(){
-        return numCarsParked;
-    }
-
-    public ArrayList<ParkingTicket> getParkingTickets(ArrayList<Car> carArrayList) {
-        ArrayList<ParkingTicket> ticketArrayList = new ArrayList<>();
-        for(int ticket=0; ticket < carArrayList.size(); ticket++){
-            ticketArrayList.add(new ParkingTicket());
-        }
-
-        return ticketArrayList;
-    }
-
     public boolean isFull() {
-        return carMap.size() >= size;
+        return ticketCarMap.size() >= size;
+    }
+
+    public int getAvailableSpace() {
+        return size - ticketCarMap.size();
     }
 
     public List<Car> getCars() {
@@ -94,6 +64,6 @@ public class ParkingLot {
     }
 
     Map<ParkingTicket, Car> getNumberOfParkedCars() {
-        return carMap;
+        return ticketCarMap;
     }
 }

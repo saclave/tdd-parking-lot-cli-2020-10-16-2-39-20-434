@@ -15,7 +15,7 @@ public class SmartParkingBoy extends ParkingBoy{
     @Override
     public ParkingLot findAvailableParkingLot() throws ParkingSystemException {
         return parkingLotArrayList.stream()
-                .max(Comparator.comparing(ParkingLot::getRemainingSlots))
+                .max(Comparator.comparing(ParkingLot::getAvailableSpace))
                 .orElseThrow(() -> new ParkingSystemException(NOT_ENOUGH_POSITION));
     }
 

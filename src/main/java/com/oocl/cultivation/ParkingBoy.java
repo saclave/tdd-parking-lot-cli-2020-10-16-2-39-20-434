@@ -38,37 +38,8 @@ public class ParkingBoy {
         return null;
     }
 
-    public ArrayList<ParkingTicket> parkMultipleCars(ArrayList<Car> carArrayList) throws ParkingSystemException {
-        for(Car car : carArrayList){
-            parkIntoMultipleLots(car);
-        }
-        if(carArrayList.size() > 0){
-            this.checkIfFull(getParkingLot().get(0));
-        }
-        return parkingLot.getParkingTickets(carArrayList);
-    }
-
-    public boolean checkIfFull(ParkingLot parkingLot) throws ParkingSystemException {
-        if(parkingLot.isFull()){
-            throw new ParkingSystemException(NOT_ENOUGH_POSITION);
-        }
-        else{
-            return false;
-        }
-    }
-
     public ArrayList<ParkingLot> getParkingLot() {
         return parkingLotArrayList;
-    }
-
-    private void parkIntoMultipleLots(Car car) throws ParkingSystemException {
-        for(ParkingLot lot : parkingLotArrayList){
-            if(lot.getRemainingSlots() > 0){
-                lot.setParkedCarCount();
-                this.parkCar(car);
-                break;
-            }
-        }
     }
 
     public Car fetchCar(ParkingTicket parkingTicket) throws ParkingSystemException {
@@ -95,14 +66,6 @@ public class ParkingBoy {
     public ParkingBoy setMultipleParkingLots(ArrayList<ParkingLot> parkingLotArrayList) {
         this.parkingLotArrayList = parkingLotArrayList;
         return this;
-    }
-
-    public int[] getParkingLotCount() {
-        int[] lotSpace = new int[parkingLotArrayList.size()];
-        for(int size = 0; size < parkingLotArrayList.size(); size++){
-            lotSpace[size] = parkingLotArrayList.get(size).getNumCarsParked();
-        }
-        return lotSpace;
     }
 
     public void setParkingLotArrayList(ArrayList<ParkingLot> parkingLotArrayList) {

@@ -36,9 +36,9 @@ public class ServiceManagerTest {
     @Test
     void test_to_specify_which_parking_boy_can_park_car_by_service_manager() throws ParkingSystemException {
         //given
-        parkingLot1 = new ParkingLot(1,0);
-        parkingLot2 = new ParkingLot(2, 0);
-        parkingLot3 = new ParkingLot(3, 0);
+        parkingLot1 = new ParkingLot(1);
+        parkingLot2 = new ParkingLot(2);
+        parkingLot3 = new ParkingLot(3);
         ArrayList<ParkingBoy> parkingBoyArrayList = new ArrayList<>(asList
                 (parkingBoy1, parkingBoy2, parkingBoy3));
 
@@ -53,9 +53,9 @@ public class ServiceManagerTest {
     @Test
     void test_to_specify_which_parking_boy_can_fetch_car_by_service_manager() throws ParkingSystemException {
         //given
-        parkingLot1 = new ParkingLot(1,0);
-        parkingLot2 = new ParkingLot(2, 0);
-        parkingLot3 = new ParkingLot(3, 0);
+        parkingLot1 = new ParkingLot(1);
+        parkingLot2 = new ParkingLot(2);
+        parkingLot3 = new ParkingLot(3);
         ArrayList<ParkingBoy> parkingBoyArrayList = new ArrayList<>(asList
                 (parkingBoy1, parkingBoy2, parkingBoy3));
 
@@ -72,7 +72,7 @@ public class ServiceManagerTest {
     @Test
     void test_service_manager_give_no_ticket_if_parking_boy_to_park_is_not_in_management_list() throws ParkingSystemException {
         //given
-        parkingLot1 = new ParkingLot(1,0);
+        parkingLot1 = new ParkingLot(1);
         ArrayList<ParkingBoy> parkingBoyArrayList = new ArrayList<>(asList
                 (parkingBoy1, parkingBoy2));
 
@@ -87,27 +87,14 @@ public class ServiceManagerTest {
     @Test
     void test_park_car_by_service_manager_from_managed_parking_lot() throws ParkingSystemException {
         //given
-        parkingLot1 = new ParkingLot(1,0);
-        parkingLot2 = new ParkingLot(2, 0);
+        parkingLot1 = new ParkingLot(1);
+        parkingLot2 = new ParkingLot(2);
 
         //when
         serviceManager.setMultipleParkingLots(new ArrayList<>(asList(parkingLot1, parkingLot2)));
 
         //then
-        assertNotNull(serviceManager.parkCar(car, parkingLot1));
-    }
-
-    @Test
-    void test_park_car_by_service_manager_not_from_managed_parking_lot() throws ParkingSystemException {
-        //given
-        parkingLot1 = new ParkingLot(1,0);
-        parkingLot2 = new ParkingLot(2, 0);
-
-        //when
-        serviceManager.setMultipleParkingLots(new ArrayList<>(asList(parkingLot2)));
-
-        //then
-        assertNull(serviceManager.parkCar(car, parkingLot1));
+        assertNotNull(serviceManager.parkCar(car));
     }
 
     @Test
@@ -135,7 +122,7 @@ public class ServiceManagerTest {
         //then
         assertThrows(ParkingSystemException.class, () -> {
             //given
-            parkingLot1 = new ParkingLot(1, 0);
+            parkingLot1 = new ParkingLot(1);
             ArrayList<ParkingBoy> parkingBoyArrayList = new ArrayList<>(asList
                     (parkingBoy1, parkingBoy2, parkingBoy3));
 
@@ -145,7 +132,7 @@ public class ServiceManagerTest {
             serviceManager.setManagementList(parkingBoyArrayList);
 
             serviceManager.assignParkingBoyToPark(car, parkingBoy1, parkingLot1);
-            serviceManager.parkCar(car, parkingLot1);
+            serviceManager.parkCar(car);
         });
     }
 
@@ -154,7 +141,7 @@ public class ServiceManagerTest {
         //then
         assertThrows(ParkingSystemException.class, () -> {
             //given
-            parkingLot1 = new ParkingLot(1, 0);
+            parkingLot1 = new ParkingLot(1);
             ArrayList<ParkingBoy> parkingBoyArrayList = new ArrayList<>(asList
                     (parkingBoy1, parkingBoy2, parkingBoy3));
 

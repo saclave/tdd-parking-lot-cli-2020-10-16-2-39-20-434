@@ -11,19 +11,19 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class SmartParkingBoyTest {
 
     @Test
-    void test_when_smart_parking_boy_parks_multiple_cars_in_multiple_parking_lots() throws ParkingSystemException {
+    void test_when_smart_parking_boy_parks_multiple_cars_in_multiple_parking_lots() {
         //Given
         ParkingLot parkingLot1 = new ParkingLot(2);
         ParkingLot parkingLot2 = new ParkingLot(3);
-        SuperSmartParkingBoy superSmartParkingBoy = new SuperSmartParkingBoy(new ParkingLot());
+        SmartParkingBoy smartParkingBoy = new SmartParkingBoy(new ParkingLot());
         ArrayList<ParkingLot> parkingLotArrayList = new ArrayList<>(asList(parkingLot1, parkingLot2));
 
         //when
-        superSmartParkingBoy.setParkingLotArrayList(parkingLotArrayList);
+        smartParkingBoy.setParkingLotArrayList(parkingLotArrayList);
         IntStream.range(0, 3).forEach(cars -> {
             Car car = new Car();
             try {
-                superSmartParkingBoy.parkCar(car);
+                smartParkingBoy.parkCar(car);
             } catch (ParkingSystemException e) {
                 e.printStackTrace();
             }
