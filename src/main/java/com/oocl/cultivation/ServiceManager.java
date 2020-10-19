@@ -13,10 +13,10 @@ public class ServiceManager extends ParkingBoy{
         return this.managementList;
     }
 
-    public ParkingTicket assignParkingBoyToPark(Car car, ParkingBoy parkingBoy, ParkingLot parkingLot) throws ParkingSystemException {
+    public ParkingTicket assignParkingBoyToPark(Vehicle vehicle, ParkingBoy parkingBoy, ParkingLot parkingLot) throws ParkingSystemException {
         if (isParkingBoyInList(parkingBoy)) {
             if(isParkingLotOwnedByParkingBoy(parkingBoy, parkingLot)){
-                    return parkingBoy.parkCar(car);
+                    return parkingBoy.parkCar(vehicle);
                 }
             } else {
             return null;
@@ -34,7 +34,7 @@ public class ServiceManager extends ParkingBoy{
                 .anyMatch(managementList -> managementList == parkingBoy);
     }
 
-    public Car assignParkBoyToFetch(ParkingTicket parkingTicket, ParkingBoy parkingBoy, ParkingLot parkingLot) throws ParkingSystemException {
+    public Vehicle assignParkBoyToFetch(ParkingTicket parkingTicket, ParkingBoy parkingBoy, ParkingLot parkingLot) throws ParkingSystemException {
         if (isParkingBoyInList(parkingBoy)) {
             if(isParkingLotOwnedByParkingBoy(parkingBoy, parkingLot)){
                 return parkingBoy.fetchCar(parkingTicket);

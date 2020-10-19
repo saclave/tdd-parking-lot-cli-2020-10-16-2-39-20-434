@@ -10,14 +10,14 @@ import static java.util.Arrays.asList;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ParkingBoysTest {
-    private Car car;
+    private Vehicle vehicle;
     private ParkingLot parkingLot;
     private ParkingBoy parkingBoy;
     private ParkingTicket parkingTicket;
 
     @BeforeEach
     void setup(){
-        car = new Car();
+        vehicle = new Vehicle();
         parkingLot = new ParkingLot();
         parkingTicket = new ParkingTicket(true, false);
     }
@@ -27,7 +27,7 @@ class ParkingBoysTest {
         //given
          parkingBoy = new ParkingBoy(parkingLot);
         //when
-        parkingTicket = parkingBoy.parkCar(car);
+        parkingTicket = parkingBoy.parkCar(vehicle);
         //then
         assertNotNull(parkingTicket);
     }
@@ -37,27 +37,27 @@ class ParkingBoysTest {
         //given
         parkingBoy = new ParkingBoy(parkingLot);
         //when
-        parkingTicket = parkingBoy.parkCar(car);
-        Car fetchCar = parkingBoy.fetchCar(parkingTicket);
+        parkingTicket = parkingBoy.parkCar(vehicle);
+        Vehicle fetchVehicle = parkingBoy.fetchCar(parkingTicket);
         //then
-        assertEquals(car, fetchCar);
+        assertEquals(vehicle, fetchVehicle);
     }
 
     @Test
     void test_when_2_cars_parked_2_cars_fetched_from_parking_ticket_by_parking_boy() throws ParkingSystemException {
         //given
-        Car car2 = new Car();
+        Vehicle vehicle2 = new Vehicle();
         parkingBoy = new ParkingBoy(parkingLot);
 
         //when
-        parkingTicket = parkingBoy.parkCar(car);
-        Car fetchCar = parkingBoy.fetchCar(parkingTicket);
-        ParkingTicket parkingTicket2 = parkingBoy.parkCar(car2);
-        Car fetchCar2 = parkingBoy.fetchCar(parkingTicket2);
+        parkingTicket = parkingBoy.parkCar(vehicle);
+        Vehicle fetchVehicle = parkingBoy.fetchCar(parkingTicket);
+        ParkingTicket parkingTicket2 = parkingBoy.parkCar(vehicle2);
+        Vehicle fetchVehicle2 = parkingBoy.fetchCar(parkingTicket2);
 
         //then
-        assertEquals(car, fetchCar);
-        assertEquals(car2, fetchCar2);
+        assertEquals(vehicle, fetchVehicle);
+        assertEquals(vehicle2, fetchVehicle2);
     }
 
     @Test
@@ -67,7 +67,7 @@ class ParkingBoysTest {
             //given
         parkingBoy = new ParkingBoy(parkingLot);
         //when
-        Car fetchCar = parkingBoy.fetchCar(new ParkingTicket());
+        Vehicle fetchVehicle = parkingBoy.fetchCar(new ParkingTicket());
         });
     }
 
@@ -77,9 +77,9 @@ class ParkingBoysTest {
         parkingBoy = new ParkingBoy(parkingLot);
         //when
         parkingTicket = parkingBoy.parkCar(null);
-        Car fetchCar = parkingBoy.fetchCar(parkingTicket);
+        Vehicle fetchVehicle = parkingBoy.fetchCar(parkingTicket);
         //then
-        assertNull(fetchCar);
+        assertNull(fetchVehicle);
     }
 
     @Test
@@ -89,8 +89,8 @@ class ParkingBoysTest {
         //given
         parkingBoy = new ParkingBoy(parkingLot);
         //when
-        parkingTicket = parkingBoy.parkCar(car);
-        Car fetchCar = parkingBoy.fetchCar(parkingTicket);
+        parkingTicket = parkingBoy.parkCar(vehicle);
+        Vehicle fetchVehicle = parkingBoy.fetchCar(parkingTicket);
         parkingBoy.fetchCar(parkingTicket);
         });
     }
@@ -100,13 +100,13 @@ class ParkingBoysTest {
         //then
         assertThrows(ParkingSystemException.class, () -> {
         //given
-        Car car2 = new Car();
+        Vehicle vehicle2 = new Vehicle();
         parkingLot = new ParkingLot(1);
         parkingBoy = new ParkingBoy(parkingLot);
 
         //when
-        parkingBoy.parkCar(car);
-        parkingBoy.parkCar(car2);
+        parkingBoy.parkCar(vehicle);
+        parkingBoy.parkCar(vehicle2);
         });
     }
 
@@ -156,13 +156,13 @@ class ParkingBoysTest {
         //then
         assertThrows(ParkingSystemException.class, () -> {
             //given
-            Car car2 = new Car();
+            Vehicle vehicle2 = new Vehicle();
             parkingLot = new ParkingLot(1);
             parkingBoy = new ParkingBoy(parkingLot);
 
             //when
-            parkingBoy.parkCar(car);
-            parkingBoy.parkCar(car2);
+            parkingBoy.parkCar(vehicle);
+            parkingBoy.parkCar(vehicle2);
         });
     }
 
@@ -178,9 +178,9 @@ class ParkingBoysTest {
         //when
         parkingBoy.setParkingLotArrayList(parkingLotArrayList);
         IntStream.range(0, 3).forEach(cars -> {
-            Car car = new Car();
+            Vehicle vehicle = new Vehicle();
             try {
-                parkingBoy.parkCar(car);
+                parkingBoy.parkCar(vehicle);
             } catch (ParkingSystemException e) {
                 e.printStackTrace();
             }
@@ -205,9 +205,9 @@ class ParkingBoysTest {
         //when
         smartParkingBoy.setParkingLotArrayList(parkingLotArrayList);
         IntStream.range(0, 3).forEach(cars -> {
-            Car car = new Car();
+            Vehicle vehicle = new Vehicle();
             try {
-                smartParkingBoy.parkCar(car);
+                smartParkingBoy.parkCar(vehicle);
             } catch (ParkingSystemException e) {
                 e.printStackTrace();
             }
@@ -231,9 +231,9 @@ class ParkingBoysTest {
         //when
         superSmartParkingBoy.setParkingLotArrayList(parkingLotArrayList);
         IntStream.range(0, 3).forEach(cars -> {
-            Car car = new Car();
+            Vehicle vehicle = new Vehicle();
             try {
-                superSmartParkingBoy.parkCar(car);
+                superSmartParkingBoy.parkCar(vehicle);
             } catch (ParkingSystemException e) {
                 e.printStackTrace();
             }

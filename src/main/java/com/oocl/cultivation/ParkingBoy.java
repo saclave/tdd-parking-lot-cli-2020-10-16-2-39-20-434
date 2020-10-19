@@ -19,12 +19,12 @@ public class ParkingBoy {
         this(new ParkingLot());
     }
 
-    public ParkingTicket parkCar(Car car) throws ParkingSystemException {
+    public ParkingTicket parkCar(Vehicle vehicle) throws ParkingSystemException {
         parkingLot = findAvailableParkingLot();
         if (parkingLot == null) {
             throw new ParkingSystemException(NOT_ENOUGH_POSITION);
         }
-        parkingTicket = parkingLot.issueTicket(car);
+        parkingTicket = parkingLot.issueTicket(vehicle);
 
         return parkingTicket;
     }
@@ -42,12 +42,12 @@ public class ParkingBoy {
         return parkingLotArrayList;
     }
 
-    public Car fetchCar(ParkingTicket parkingTicket) throws ParkingSystemException {
+    public Vehicle fetchCar(ParkingTicket parkingTicket) throws ParkingSystemException {
         checkTicket(parkingTicket);
         for(ParkingLot parkingLot : parkingLotArrayList){
-            for(Car car : parkingLot.getCars()){
-                car = parkingLot.getCar(parkingTicket);
-                return car;
+            for(Vehicle vehicle : parkingLot.getCars()){
+                vehicle = parkingLot.getCar(parkingTicket);
+                return vehicle;
             }
         }
         throw new ParkingSystemException(UNRECOGNIZED_PARKING_TICKET);

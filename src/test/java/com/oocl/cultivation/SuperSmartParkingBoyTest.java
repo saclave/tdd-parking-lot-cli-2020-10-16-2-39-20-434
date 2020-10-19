@@ -22,9 +22,9 @@ public class SuperSmartParkingBoyTest {
         //when
         superSmartParkingBoy.setParkingLotArrayList(parkingLotArrayList);
         IntStream.range(0, 3).forEach(cars -> {
-            Car car = new Car();
+            Vehicle vehicle = new Vehicle();
             try {
-                superSmartParkingBoy.parkCar(car);
+                superSmartParkingBoy.parkCar(vehicle);
             } catch (ParkingSystemException e) {
                 e.printStackTrace();
             }

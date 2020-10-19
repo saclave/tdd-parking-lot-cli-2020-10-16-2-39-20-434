@@ -15,7 +15,7 @@ public class ServiceManagerTest {
     private ParkingLot parkingLot1;
     private ParkingLot parkingLot2;
     private ParkingLot parkingLot3;
-    private Car car = new Car();
+    private Vehicle vehicle = new Vehicle();
     private ServiceManager serviceManager = new ServiceManager();
 
     @BeforeEach
@@ -47,7 +47,7 @@ public class ServiceManagerTest {
         serviceManager.setManagementList(parkingBoyArrayList);
 
         //then
-        assertNotNull(serviceManager.assignParkingBoyToPark(car, parkingBoy1, parkingLot1));
+        assertNotNull(serviceManager.assignParkingBoyToPark(vehicle, parkingBoy1, parkingLot1));
     }
 
     @Test
@@ -63,7 +63,7 @@ public class ServiceManagerTest {
         parkingBoy1.setMultipleParkingLots(new ArrayList<>(asList(parkingLot1, parkingLot2, parkingLot3)));
         parkingBoy2.setMultipleParkingLots(new ArrayList<>(asList(parkingLot1)));
         serviceManager.setManagementList(parkingBoyArrayList);
-        ParkingTicket parkingTicket = serviceManager.assignParkingBoyToPark(car, parkingBoy1, parkingLot1);
+        ParkingTicket parkingTicket = serviceManager.assignParkingBoyToPark(vehicle, parkingBoy1, parkingLot1);
 
         //then
         assertNotNull(serviceManager.assignParkBoyToFetch(parkingTicket, parkingBoy2, parkingLot1));
@@ -81,7 +81,7 @@ public class ServiceManagerTest {
         serviceManager.setManagementList(parkingBoyArrayList);
 
         //then
-        assertNull(serviceManager.assignParkingBoyToPark(car, parkingBoy3, parkingLot1));
+        assertNull(serviceManager.assignParkingBoyToPark(vehicle, parkingBoy3, parkingLot1));
     }
 
     @Test
@@ -94,7 +94,7 @@ public class ServiceManagerTest {
         serviceManager.setMultipleParkingLots(new ArrayList<>(asList(parkingLot1, parkingLot2)));
 
         //then
-        assertNotNull(serviceManager.parkCar(car));
+        assertNotNull(serviceManager.parkCar(vehicle));
     }
 
     @Test
@@ -131,8 +131,8 @@ public class ServiceManagerTest {
             serviceManager.setMultipleParkingLots(new ArrayList<>(asList(parkingLot1)));
             serviceManager.setManagementList(parkingBoyArrayList);
 
-            serviceManager.assignParkingBoyToPark(car, parkingBoy1, parkingLot1);
-            serviceManager.parkCar(car);
+            serviceManager.assignParkingBoyToPark(vehicle, parkingBoy1, parkingLot1);
+            serviceManager.parkCar(vehicle);
         });
     }
 

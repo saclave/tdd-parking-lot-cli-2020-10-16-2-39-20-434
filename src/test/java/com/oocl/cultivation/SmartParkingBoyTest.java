@@ -21,9 +21,9 @@ public class SmartParkingBoyTest {
         //when
         smartParkingBoy.setParkingLotArrayList(parkingLotArrayList);
         IntStream.range(0, 3).forEach(cars -> {
-            Car car = new Car();
+            Vehicle vehicle = new Vehicle();
             try {
-                smartParkingBoy.parkCar(car);
+                smartParkingBoy.parkCar(vehicle);
             } catch (ParkingSystemException e) {
                 e.printStackTrace();
             }

@@ -6,13 +6,12 @@ import java.util.List;
 import java.util.Map;
 
 public class ParkingLot {
-    private ArrayList<Car> carArrayList;
+    private ArrayList<Vehicle> vehicleArrayList;
     private int size;
-    private Car car;
-    private Map<ParkingTicket, Car> ticketCarMap = new HashMap<>();
+    private Map<ParkingTicket, Vehicle> ticketCarMap = new HashMap<>();
 
     public ParkingLot(int size) {
-        this.carArrayList = new ArrayList<>();
+        this.vehicleArrayList = new ArrayList<>();
         this.size = size;
     }
 
@@ -20,31 +19,31 @@ public class ParkingLot {
         this(10);
     }
 
-    public ParkingTicket issueTicket(Car car) {
+    public ParkingTicket issueTicket(Vehicle vehicle) {
         ParkingTicket parkingTicket = new ParkingTicket(true, false);
 
-        ticketCarMap.put(parkingTicket, car);
-        parkCar(car);
+        ticketCarMap.put(parkingTicket, vehicle);
+        parkCar(vehicle);
         return getAvailableParkingLotSpace() >= 0 ? parkingTicket : null;
     }
 
-    private void parkCar(Car car) {
-        carArrayList.add(car);
+    private void parkCar(Vehicle vehicle) {
+        vehicleArrayList.add(vehicle);
     }
 
     private int getAvailableParkingLotSpace() {
         return size - ticketCarMap.size();
     }
 
-    public Car getCar(ParkingTicket parkingTicket) {
-        car = ticketCarMap.get(parkingTicket);
+    public Vehicle getCar(ParkingTicket parkingTicket) {
+        Vehicle vehicle = ticketCarMap.get(parkingTicket);
         ticketCarMap.remove(parkingTicket);
-        removeCar(car);
-        return car;
+        removeCar(vehicle);
+        return vehicle;
     }
 
-    private void removeCar(Car car) {
-        carArrayList.remove(car);
+    private void removeCar(Vehicle vehicle) {
+        vehicleArrayList.remove(vehicle);
     }
 
     public boolean isFull() {
@@ -55,15 +54,15 @@ public class ParkingLot {
         return size - ticketCarMap.size();
     }
 
-    public List<Car> getCars() {
-        return carArrayList;
+    public List<Vehicle> getCars() {
+        return vehicleArrayList;
     }
 
     public int getAverageAvailableSlot() {
         return getAvailableParkingLotSpace() / size * 100;
     }
 
-    Map<ParkingTicket, Car> getNumberOfParkedCars() {
+    Map<ParkingTicket, Vehicle> getNumberOfParkedCars() {
         return ticketCarMap;
     }
 }
