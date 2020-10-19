@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 public class ParkingLot {
-    public boolean isFull = false;
     private ArrayList<Car> carArrayList;
     private int numCarsParked;
     private int size;
@@ -60,10 +59,6 @@ public class ParkingLot {
         return size - numCarsParked;
     }
 
-    public int getLotSize(){
-        return size;
-    }
-
     public void setParkedCarCount() {
         if(this.numCarsParked == this.size){
             return;
@@ -87,10 +82,14 @@ public class ParkingLot {
     }
 
     public boolean isFull() {
-        return carArrayList.size() >= size;
+        return carMap.size() >= size;
     }
 
     public List<Car> getCars() {
         return carArrayList;
+    }
+
+    public int getAverageAvailableSlot() {
+        return getAvailableParkingLotSpace() / size * 100;
     }
 }

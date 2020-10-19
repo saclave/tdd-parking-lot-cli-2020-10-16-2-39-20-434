@@ -29,7 +29,7 @@ public class ParkingBoy {
         return parkingTicket;
     }
 
-    public ParkingLot findAvailableParkingLot() {
+    public ParkingLot findAvailableParkingLot() throws ParkingSystemException {
         for(ParkingLot parkingLot : parkingLotArrayList){
             if(!parkingLot.isFull()){
                 return parkingLot;
@@ -49,7 +49,7 @@ public class ParkingBoy {
     }
 
     public boolean checkIfFull(ParkingLot parkingLot) throws ParkingSystemException {
-        if(parkingLot.isFull){
+        if(parkingLot.isFull()){
             throw new ParkingSystemException(NOT_ENOUGH_POSITION);
         }
         else{
@@ -105,4 +105,7 @@ public class ParkingBoy {
         return lotSpace;
     }
 
+    public void setParkingLotArrayList(ArrayList<ParkingLot> parkingLotArrayList) {
+        this.parkingLotArrayList = parkingLotArrayList;
+    }
 }

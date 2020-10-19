@@ -115,9 +115,9 @@ public class ServiceManagerTest {
         //then
         assertThrows(ParkingSystemException.class, () -> {
             //given
-            parkingLot1 = new ParkingLot(1, 0);
-            parkingLot2 = new ParkingLot(2, 0);
-            parkingLot3 = new ParkingLot(3, 0);
+            parkingLot1 = new ParkingLot(1);
+            parkingLot2 = new ParkingLot(2);
+            parkingLot3 = new ParkingLot(3);
             ArrayList<ParkingBoy> parkingBoyArrayList = new ArrayList<>(asList
                     (parkingBoy1, parkingBoy2, parkingBoy3));
 

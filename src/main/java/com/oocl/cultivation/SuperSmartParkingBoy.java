@@ -2,36 +2,24 @@ package com.oocl.cultivation;
 
 import java.util.ArrayList;
 
+import static com.oocl.cultivation.ParkingSystemException.NOT_ENOUGH_POSITION;
+
 public class SuperSmartParkingBoy extends ParkingBoy {
-    private double temp;
-    private int ctr = 0;
+    private ArrayList<ParkingLot> parkingLotArrayList;
+
+    public SuperSmartParkingBoy(ParkingLot parkingLot) {
+        super(parkingLot);
+    }
 
     @Override
-    public ArrayList<ParkingTicket> parkMultipleCars(ArrayList<Car> carArrayList) throws ParkingSystemException {
-        for(int car=0; car<carArrayList.size(); car++) {
-            temp = 0;
-            checkMultipleParkingAvailability();
-            if (temp > 0) {
-                this.getParkingLot().get(ctr).setParkedCarCount();
-                this.parkCar(carArrayList.get(car));
-            }
-            else{
-                this.checkIfFull(getParkingLot().get(ctr));
-            }
-        }
-        return parkingLot.getParkingTickets(carArrayList);
+    public ParkingLot findAvailableParkingLot() throws ParkingSystemException {
+        return parkingLotArrayList.stream().reduce((parkingLot, parkingLot2) -> parkingLot.getAverageAvailableSlot() >
+                parkingLot2.getAverageAvailableSlot() ? parkingLot : parkingLot2)
+                .orElseThrow(() -> new ParkingSystemException(NOT_ENOUGH_POSITION));
     }
 
-    private void checkMultipleParkingAvailability() {
-        for(int lot = 0; lot < this.getParkingLot().size(); lot++){
-            if(temp < getAvailableSlots(lot)){
-                temp = (getAvailableSlots(lot));
-                ctr = lot;
-            }
-        }
-    }
-
-    private double getAvailableSlots(int lot) {
-        return this.getParkingLot().get(lot).getRemainingSlots() * 1.0 / this.getParkingLot().get(lot).getLotSize();
+    @Override
+    public void setParkingLotArrayList(ArrayList<ParkingLot> parkingLotArrayList) {
+        this.parkingLotArrayList = parkingLotArrayList;
     }
 }

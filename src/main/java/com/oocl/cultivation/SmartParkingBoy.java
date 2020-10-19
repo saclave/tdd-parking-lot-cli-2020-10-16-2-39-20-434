@@ -1,29 +1,26 @@
 package com.oocl.cultivation;
 
 import java.util.ArrayList;
+import java.util.Comparator;
+
+import static com.oocl.cultivation.ParkingSystemException.NOT_ENOUGH_POSITION;
 
 public class SmartParkingBoy extends ParkingBoy{
-    private int temp = 0;
-    private int ctr = 0;
+    private ArrayList<ParkingLot> parkingLotArrayList;
 
-    @Override
-    public ArrayList<ParkingTicket> parkMultipleCars(ArrayList<Car> carArrayList) throws ParkingSystemException {
-        for(int car=0; car<carArrayList.size(); car++) {
-            parkIntoMultipleLots();
-            if (temp > 0) {
-                this.getParkingLot().get(ctr - 1).setParkedCarCount();
-                this.parkCar(carArrayList.get(car));
-            }
-        }
-        return parkingLot.getParkingTickets(carArrayList);
+    public SmartParkingBoy(ParkingLot parkingLot){
+        super(parkingLot);
     }
 
-    private void parkIntoMultipleLots() {
-        for(ParkingLot lot : this.getParkingLot()){
-            if(temp < lot.getRemainingSlots()){
-                temp = lot.getRemainingSlots();
-                ctr += 1;
-            }
-        }
+    @Override
+    public ParkingLot findAvailableParkingLot() throws ParkingSystemException {
+        return parkingLotArrayList.stream()
+                .max(Comparator.comparing(ParkingLot::getRemainingSlots))
+                .orElseThrow(() -> new ParkingSystemException(NOT_ENOUGH_POSITION));
+    }
+
+    @Override
+    public void setParkingLotArrayList(ArrayList<ParkingLot> parkingLotArrayList) {
+        this.parkingLotArrayList = parkingLotArrayList;
     }
 }
