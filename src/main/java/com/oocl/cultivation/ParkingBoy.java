@@ -2,6 +2,8 @@ package com.oocl.cultivation;
 
 import java.util.ArrayList;
 
+import static com.oocl.cultivation.ParkingSystemException.*;
+
 public class ParkingBoy {
     public ParkingLot parkingLot;
     public ParkingTicket parkingTicket;
@@ -20,7 +22,7 @@ public class ParkingBoy {
     public ParkingTicket parkCar(Car car) throws ParkingSystemException {
         parkingLot = findAvailableParkingLot();
         if (parkingLot == null) {
-            throw new ParkingSystemException("Not enough position");
+            throw new ParkingSystemException(NOT_ENOUGH_POSITION);
         }
         parkingTicket = parkingLot.issueTicket(car);
 
@@ -48,7 +50,7 @@ public class ParkingBoy {
 
     public boolean checkIfFull(ParkingLot parkingLot) throws ParkingSystemException {
         if(parkingLot.isFull){
-            throw new ParkingSystemException("Not enough position.");
+            throw new ParkingSystemException(NOT_ENOUGH_POSITION);
         }
         else{
             return false;
@@ -77,16 +79,16 @@ public class ParkingBoy {
                 return car;
             }
         }
-        throw new ParkingSystemException("Unrecognized parking ticket.");
+        throw new ParkingSystemException(UNRECOGNIZED_PARKING_TICKET);
     }
 
     public void checkTicket(ParkingTicket parkingTicket) throws ParkingSystemException {
         if (parkingTicket == null) {
-            throw new ParkingSystemException("Please provide your parking ticket.");
+            throw new ParkingSystemException(PROVIDE_PARKING_TICKET);
         } else if (parkingTicket.isProvided() && parkingTicket.isUsed()) {
-            throw new ParkingSystemException("Unrecognized parking ticket.");
+            throw new ParkingSystemException(UNRECOGNIZED_PARKING_TICKET);
         } else if (!parkingTicket.isProvided() && parkingTicket.isUsed()) {
-            throw new ParkingSystemException("Unrecognized parking ticket.");
+            throw new ParkingSystemException(UNRECOGNIZED_PARKING_TICKET);
         }
     }
 

@@ -2,6 +2,8 @@ package com.oocl.cultivation;
 
 import java.util.ArrayList;
 
+import static com.oocl.cultivation.ParkingSystemException.NOT_ENOUGH_POSITION;
+
 public class ServiceManager extends ParkingBoy{
     private ArrayList<ParkingBoy> managementList;
 
@@ -49,7 +51,7 @@ public class ServiceManager extends ParkingBoy{
         if(isParkingLotOwnedByServiceManager(this, parkingLot)) {
             parkingLot = super.findAvailableParkingLot();
             if (parkingLot == null) {
-                throw new ParkingSystemException("Not enough position");
+                throw new ParkingSystemException(NOT_ENOUGH_POSITION);
             }
             super.parkingTicket = parkingLot.issueTicket(car);
 
