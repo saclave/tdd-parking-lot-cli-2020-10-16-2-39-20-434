@@ -8,11 +8,7 @@ public class ParkingTicket {
         this.isUsed = isUsed;
         this.isProvided = isProvided;
     }
-
-    public ParkingTicket() {
-
-    }
-
+    
     public boolean isProvided() {
         return isProvided;
     }
