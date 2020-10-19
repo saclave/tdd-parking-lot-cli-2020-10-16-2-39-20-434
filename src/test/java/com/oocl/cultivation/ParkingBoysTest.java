@@ -61,7 +61,7 @@ class ParkingBoysTest {
     }
 
     @Test
-    void test_when_wrong_ticket_issued_no_car_is_fetched() throws ParkingSystemException {
+    void test_when_wrong_ticket_issued_no_car_is_fetched() {
         //then
         assertThrows(ParkingSystemException.class, () -> {
             //given
@@ -83,7 +83,7 @@ class ParkingBoysTest {
     }
 
     @Test
-    void test_when_ticket_is_used_return_null_car() throws ParkingSystemException {
+    void test_when_ticket_is_used_return_null_car() {
         //then
         assertThrows(ParkingSystemException.class, () -> {
         //given
@@ -168,7 +168,7 @@ class ParkingBoysTest {
 
     //Story 3
     @Test
-    void test_when_2_parking_lots_for_not_smart_parking_boy() throws ParkingSystemException {
+    void test_when_2_parking_lots_for_not_smart_parking_boy() {
         //given
         ParkingBoy parkingBoy = new ParkingBoy(new ParkingLot());
         ParkingLot parkingLot1 = new ParkingLot(2);
@@ -195,19 +195,19 @@ class ParkingBoysTest {
 
     //Story 4
     @Test
-    void test_when_smart_parking_boy_parks_multiple_cars_in_multiple_parking_lots() throws ParkingSystemException {
+    void test_when_smart_parking_boy_parks_multiple_cars_in_multiple_parking_lots() {
         //Given
         ParkingLot parkingLot1 = new ParkingLot(2);
         ParkingLot parkingLot2 = new ParkingLot(3);
-        SuperSmartParkingBoy superSmartParkingBoy = new SuperSmartParkingBoy(new ParkingLot());
+        SmartParkingBoy smartParkingBoy = new SmartParkingBoy(new ParkingLot());
         ArrayList<ParkingLot> parkingLotArrayList = new ArrayList<>(asList(parkingLot1, parkingLot2));
 
         //when
-        superSmartParkingBoy.setParkingLotArrayList(parkingLotArrayList);
+        smartParkingBoy.setParkingLotArrayList(parkingLotArrayList);
         IntStream.range(0, 3).forEach(cars -> {
             Car car = new Car();
             try {
-                superSmartParkingBoy.parkCar(car);
+                smartParkingBoy.parkCar(car);
             } catch (ParkingSystemException e) {
                 e.printStackTrace();
             }
@@ -221,7 +221,7 @@ class ParkingBoysTest {
 
     //Story 5
     @Test
-    void test_when_super_smart_parking_boy_parks_multiple_cars_in_multiple_parking_lots() throws ParkingSystemException {
+    void test_when_super_smart_parking_boy_parks_multiple_cars_in_multiple_parking_lots() {
         //Given
         ParkingLot parkingLot1 = new ParkingLot(2);
         ParkingLot parkingLot2 = new ParkingLot(3);
