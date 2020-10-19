@@ -5,7 +5,6 @@ import java.util.ArrayList;
 public class ParkingBoy {
     public ParkingLot parkingLot;
     public ParkingTicket parkingTicket;
-    private Car car;
     private ArrayList<ParkingLot> parkingLotArrayList;
 
     public ParkingBoy(ParkingLot parkingLot) {
