@@ -1,28 +1,38 @@
 package com.oocl.cultivation;
 
 import org.junit.jupiter.api.Test;
+
 import java.util.ArrayList;
+import java.util.stream.IntStream;
+
 import static java.util.Arrays.asList;
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 public class SuperSmartParkingBoyTest {
 
     @Test
-    void test_when_super_smart_parking_boy_parks_multiple_cars_in_multiple_parking_lots() throws ParkingSystemException {
+    void test_when_super_smart_parking_boy_parks_multiple_cars_in_multiple_parking_lots() {
         //Given
+        ParkingLot parkingLot1 = new ParkingLot(2);
+        ParkingLot parkingLot2 = new ParkingLot(3);
         SuperSmartParkingBoy superSmartParkingBoy = new SuperSmartParkingBoy(new ParkingLot());
-        ArrayList<Car> carArrayList = new ArrayList<>(asList(new Car(), new Car(), new Car()));
-        ArrayList<ParkingLot> parkingLotArrayList = new ArrayList<>(asList(
-                new ParkingLot(2),
-                new ParkingLot(3)));
+        ArrayList<ParkingLot> parkingLotArrayList = new ArrayList<>(asList(parkingLot1, parkingLot2));
 
         //when
-        superSmartParkingBoy.setMultipleParkingLots(parkingLotArrayList);
-        superSmartParkingBoy.parkMultipleCars(carArrayList);
-        int carsParkedPerLot[] = {1,2};
-
+        superSmartParkingBoy.setParkingLotArrayList(parkingLotArrayList);
+        IntStream.range(0, 3).forEach(cars -> {
+            Car car = new Car();
+            try {
+                superSmartParkingBoy.parkCar(car);
+            } catch (ParkingSystemException e) {
+                e.printStackTrace();
+            }
+        });
+        int actual1 = parkingLot1.getNumberOfParkedCars().size();
+        int actual2 = parkingLot2.getNumberOfParkedCars().size();
         //then
-        assertArrayEquals(carsParkedPerLot, superSmartParkingBoy.getParkingLotCount());
+        assertEquals(1, actual1);
+        assertEquals(2, actual2);
     }
 }

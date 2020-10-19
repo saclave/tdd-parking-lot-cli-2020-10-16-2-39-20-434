@@ -92,4 +92,8 @@ public class ParkingLot {
     public int getAverageAvailableSlot() {
         return getAvailableParkingLotSpace() / size * 100;
     }
+
+    Map<ParkingTicket, Car> getNumberOfParkedCars() {
+        return carMap;
+    }
 }
