@@ -54,7 +54,7 @@ public class ParkingLot {
         return size - ticketCarMap.size();
     }
 
-    public List<Vehicle> getCars() {
+    public List<Vehicle> getCarList() {
         return vehicleArrayList;
     }
 

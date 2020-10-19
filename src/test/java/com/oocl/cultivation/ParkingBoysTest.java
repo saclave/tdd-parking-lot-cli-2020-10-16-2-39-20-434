@@ -90,7 +90,7 @@ class ParkingBoysTest {
         parkingBoy = new ParkingBoy(parkingLot);
         //when
         parkingTicket = parkingBoy.parkCar(vehicle);
-        Vehicle fetchVehicle = parkingBoy.fetchCar(parkingTicket);
+        parkingBoy.fetchCar(parkingTicket);
         parkingBoy.fetchCar(parkingTicket);
         });
     }

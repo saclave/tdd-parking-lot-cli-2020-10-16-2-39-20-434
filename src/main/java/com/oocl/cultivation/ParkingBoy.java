@@ -45,7 +45,7 @@ public class ParkingBoy {
     public Vehicle fetchCar(ParkingTicket parkingTicket) throws ParkingSystemException {
         checkTicket(parkingTicket);
         for(ParkingLot parkingLot : parkingLotArrayList){
-            for(Vehicle vehicle : parkingLot.getCars()){
+            for(Vehicle vehicle : parkingLot.getCarList()){
                 vehicle = parkingLot.getCar(parkingTicket);
                 return vehicle;
             }
