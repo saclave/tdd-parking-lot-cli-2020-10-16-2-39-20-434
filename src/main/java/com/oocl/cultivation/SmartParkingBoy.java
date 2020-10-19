@@ -1,12 +1,12 @@
 package com.oocl.cultivation;
 
-import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 
 import static com.oocl.cultivation.ParkingSystemException.NOT_ENOUGH_POSITION;
 
 public class SmartParkingBoy extends ParkingBoy{
-    private ArrayList<ParkingLot> parkingLotArrayList;
+    private List<ParkingLot> parkingLotArrayList;
 
     public SmartParkingBoy(ParkingLot parkingLot){
         super(parkingLot);
@@ -20,7 +20,7 @@ public class SmartParkingBoy extends ParkingBoy{
     }
 
     @Override
-    public void setParkingLotArrayList(ArrayList<ParkingLot> parkingLotArrayList) {
+    public void setParkingLotArrayList(List<ParkingLot> parkingLotArrayList) {
         this.parkingLotArrayList = parkingLotArrayList;
     }
 }

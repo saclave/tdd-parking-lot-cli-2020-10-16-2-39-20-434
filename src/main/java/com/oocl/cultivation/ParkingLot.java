@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 public class ParkingLot {
-    private ArrayList<Vehicle> vehicleArrayList;
+    private List<Vehicle> vehicleArrayList;
     private int size;
     private Map<ParkingTicket, Vehicle> ticketCarMap = new HashMap<>();
 

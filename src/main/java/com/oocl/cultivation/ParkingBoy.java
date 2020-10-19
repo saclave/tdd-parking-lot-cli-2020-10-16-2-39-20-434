@@ -1,13 +1,14 @@
 package com.oocl.cultivation;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static com.oocl.cultivation.ParkingSystemException.*;
 
 public class ParkingBoy {
     public ParkingLot parkingLot;
     public ParkingTicket parkingTicket;
-    private ArrayList<ParkingLot> parkingLotArrayList;
+    private List<ParkingLot> parkingLotArrayList;
 
     public ParkingBoy(ParkingLot parkingLot) {
         this.parkingLot = parkingLot;
@@ -38,7 +39,7 @@ public class ParkingBoy {
         return null;
     }
 
-    public ArrayList<ParkingLot> getParkingLot() {
+    public List<ParkingLot> getParkingLot() {
         return parkingLotArrayList;
     }
 
@@ -63,12 +64,12 @@ public class ParkingBoy {
         }
     }
 
-    public ParkingBoy setMultipleParkingLots(ArrayList<ParkingLot> parkingLotArrayList) {
+    public ParkingBoy setMultipleParkingLots(List<ParkingLot> parkingLotArrayList) {
         this.parkingLotArrayList = parkingLotArrayList;
         return this;
     }
 
-    public void setParkingLotArrayList(ArrayList<ParkingLot> parkingLotArrayList) {
+    public void setParkingLotArrayList(List<ParkingLot> parkingLotArrayList) {
         this.parkingLotArrayList = parkingLotArrayList;
     }
 }

@@ -1,15 +1,15 @@
 package com.oocl.cultivation;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class ServiceManager extends ParkingBoy{
-    private ArrayList<ParkingBoy> managementList;
+    private List<ParkingBoy> managementList;
 
-    public void setManagementList(ArrayList<ParkingBoy> managementList) {
+    public void setManagementList(List<ParkingBoy> managementList) {
         this.managementList = managementList;
     }
 
-    public ArrayList<ParkingBoy> manageParkingBoys() {
+    public List<ParkingBoy> manageParkingBoys() {
         return this.managementList;
     }
 
@@ -31,7 +31,7 @@ public class ServiceManager extends ParkingBoy{
 
     private boolean isParkingBoyInList(ParkingBoy parkingBoy) {
         return managementList.stream()
-                .anyMatch(managementList -> managementList == parkingBoy);
+                .anyMatch(list -> list == parkingBoy);
     }
 
     public Vehicle assignParkBoyToFetch(ParkingTicket parkingTicket, ParkingBoy parkingBoy, ParkingLot parkingLot) throws ParkingSystemException {
