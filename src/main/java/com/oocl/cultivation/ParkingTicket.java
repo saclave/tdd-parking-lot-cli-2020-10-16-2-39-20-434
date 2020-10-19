@@ -8,7 +8,7 @@ public class ParkingTicket {
         this.isUsed = isUsed;
         this.isProvided = isProvided;
     }
-    
+
     public boolean isProvided() {
         return isProvided;
     }

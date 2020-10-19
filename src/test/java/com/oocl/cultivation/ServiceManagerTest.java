@@ -23,7 +23,7 @@ public class ServiceManagerTest {
     }
 
     @Test
-    void test_service_manager_adding_parking_boys_to_the_management_list(){
+    void when_service_manager_adding_parking_boys_to_the_management_list(){
         //given
         ArrayList<ParkingBoy> parkingBoyArrayList = new ArrayList<>(asList
                 (parkingBoy1, parkingBoy2, parkingBoy3));
@@ -34,7 +34,7 @@ public class ServiceManagerTest {
     }
 
     @Test
-    void test_to_specify_which_parking_boy_can_park_car_by_service_manager() throws ParkingSystemException {
+    void when_to_specify_which_parking_boy_can_park_car_by_service_manager() throws ParkingSystemException {
         //given
         parkingLot1 = new ParkingLot(1);
         parkingLot2 = new ParkingLot(2);
@@ -51,7 +51,7 @@ public class ServiceManagerTest {
     }
 
     @Test
-    void test_to_specify_which_parking_boy_can_fetch_car_by_service_manager() throws ParkingSystemException {
+    void when_to_specify_which_parking_boy_can_fetch_car_by_service_manager() throws ParkingSystemException {
         //given
         parkingLot1 = new ParkingLot(1);
         parkingLot2 = new ParkingLot(2);
@@ -70,7 +70,7 @@ public class ServiceManagerTest {
     }
 
     @Test
-    void test_service_manager_give_no_ticket_if_parking_boy_to_park_is_not_in_management_list() throws ParkingSystemException {
+    void when_service_manager_give_no_ticket_if_parking_boy_to_park_is_not_in_management_list() throws ParkingSystemException {
         //given
         parkingLot1 = new ParkingLot(1);
         ArrayList<ParkingBoy> parkingBoyArrayList = new ArrayList<>(asList
@@ -85,7 +85,7 @@ public class ServiceManagerTest {
     }
 
     @Test
-    void test_park_car_by_service_manager_from_managed_parking_lot() throws ParkingSystemException {
+    void when_park_car_by_service_manager_from_managed_parking_lot() throws ParkingSystemException {
         //given
         parkingLot1 = new ParkingLot(1);
         parkingLot2 = new ParkingLot(2);
@@ -98,7 +98,7 @@ public class ServiceManagerTest {
     }
 
     @Test
-    void test_when_park_of_parking_boy_throw_error_from_wrong_ticket(){
+    void when_park_of_parking_boy_throw_error_from_wrong_ticket(){
         //then
         assertThrows(ParkingSystemException.class, () -> {
             //given
@@ -118,7 +118,7 @@ public class ServiceManagerTest {
     }
 
     @Test
-    void test_when_parking_lot_capacity_is_1_when_car_is_parked_already_throw_error() {
+    void when_parking_lot_capacity_is_1_when_car_is_parked_already_throw_error() {
         //then
         assertThrows(ParkingSystemException.class, () -> {
             //given
@@ -137,7 +137,7 @@ public class ServiceManagerTest {
     }
 
     @Test
-    void test_when_no_ticket_provided_throw_error(){
+    void when_no_ticket_provided_throw_error(){
         //then
         assertThrows(ParkingSystemException.class, () -> {
             //given

@@ -23,7 +23,7 @@ class ParkingBoysTest {
     }
 
     @Test
-    void test_when_parking_boy_parks_car_into_parking_lot_and_returns_parking_ticket() throws ParkingSystemException {
+    void when_parking_boy_parks_car_into_parking_lot_and_returns_parking_ticket() throws ParkingSystemException {
         //given
          parkingBoy = new ParkingBoy(parkingLot);
         //when
@@ -33,7 +33,7 @@ class ParkingBoysTest {
     }
 
     @Test
-    void test_when_fetching_car_with_parking_ticket_from_parking_lot() throws ParkingSystemException {
+    void when_fetching_car_with_parking_ticket_from_parking_lot() throws ParkingSystemException {
         //given
         parkingBoy = new ParkingBoy(parkingLot);
         //when
@@ -44,7 +44,7 @@ class ParkingBoysTest {
     }
 
     @Test
-    void test_when_2_cars_parked_2_cars_fetched_from_parking_ticket_by_parking_boy() throws ParkingSystemException {
+    void when_2_cars_parked_2_cars_fetched_from_parking_ticket_by_parking_boy() throws ParkingSystemException {
         //given
         Vehicle vehicle2 = new Vehicle();
         parkingBoy = new ParkingBoy(parkingLot);
@@ -61,7 +61,7 @@ class ParkingBoysTest {
     }
 
     @Test
-    void test_when_wrong_ticket_issued_no_car_is_fetched() {
+    void when_wrong_ticket_issued_no_car_is_fetched() {
         //then
         assertThrows(ParkingSystemException.class, () -> {
             //given
@@ -72,7 +72,7 @@ class ParkingBoysTest {
     }
 
     @Test
-    void test_when_no_ticket_return_null_car() throws ParkingSystemException {
+    void when_no_ticket_return_null_car() throws ParkingSystemException {
         //given
         parkingBoy = new ParkingBoy(parkingLot);
         //when
@@ -83,7 +83,7 @@ class ParkingBoysTest {
     }
 
     @Test
-    void test_when_ticket_is_used_return_null_car() {
+    void when_ticket_is_used_return_null_car() {
         //then
         assertThrows(ParkingSystemException.class, () -> {
         //given
@@ -96,7 +96,7 @@ class ParkingBoysTest {
     }
 
     @Test
-    void test_when_parking_lot_capacity_is_1_when_car_is_parked_already_no_more_additional_car_and_null_ticket() {
+    void when_parking_lot_capacity_is_1_when_car_is_parked_already_no_more_additional_car_and_null_ticket() {
         //then
         assertThrows(ParkingSystemException.class, () -> {
         //given
@@ -112,7 +112,7 @@ class ParkingBoysTest {
 
     //Story 2
     @Test
-    void test_when_no_ticket_provided_throw_error(){
+    void when_no_ticket_provided_throw_error(){
         //then
         assertThrows(ParkingSystemException.class, () -> {
             //given
@@ -124,7 +124,7 @@ class ParkingBoysTest {
     }
 
     @Test
-    void test_when_given_wrong_ticket_throw_error() {
+    void when_given_wrong_ticket_throw_error() {
         //then
         assertThrows(ParkingSystemException.class, () -> {
             //given
@@ -138,7 +138,7 @@ class ParkingBoysTest {
     }
 
     @Test
-    void test_when_customer_does_not_provide_parking_ticket(){
+    void when_customer_does_not_provide_parking_ticket(){
         //then
         assertThrows(ParkingSystemException.class, () -> {
         //given
@@ -152,7 +152,7 @@ class ParkingBoysTest {
     }
 
     @Test
-    void test_when_parking_lot_is_full_throw_full_capacity(){
+    void when_parking_lot_is_full_throw_full_capacity(){
         //then
         assertThrows(ParkingSystemException.class, () -> {
             //given
@@ -168,7 +168,7 @@ class ParkingBoysTest {
 
     //Story 3
     @Test
-    void test_when_2_parking_lots_for_not_smart_parking_boy() {
+    void when_2_parking_lots_for_not_smart_parking_boy() {
         //given
         ParkingBoy parkingBoy = new ParkingBoy(new ParkingLot());
         ParkingLot parkingLot1 = new ParkingLot(2);
@@ -195,7 +195,7 @@ class ParkingBoysTest {
 
     //Story 4
     @Test
-    void test_when_smart_parking_boy_parks_multiple_cars_in_multiple_parking_lots() {
+    void when_smart_parking_boy_parks_multiple_cars_in_multiple_parking_lots() {
         //Given
         ParkingLot parkingLot1 = new ParkingLot(2);
         ParkingLot parkingLot2 = new ParkingLot(3);
@@ -221,7 +221,7 @@ class ParkingBoysTest {
 
     //Story 5
     @Test
-    void test_when_super_smart_parking_boy_parks_multiple_cars_in_multiple_parking_lots() {
+    void when_super_smart_parking_boy_parks_multiple_cars_in_multiple_parking_lots() {
         //Given
         ParkingLot parkingLot1 = new ParkingLot(2);
         ParkingLot parkingLot2 = new ParkingLot(3);
