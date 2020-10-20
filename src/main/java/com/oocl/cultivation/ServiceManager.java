@@ -1,46 +1,53 @@
 package com.oocl.cultivation;
 
+import java.util.ArrayList;
 import java.util.List;
 
-//remove inheritance + use park&fetch Util
-public abstract class ServiceManager extends ParkingBoy{
-    private List<ParkingBoy> managementList;
+import static com.oocl.cultivation.ParkingSystemException.*;
 
-    public void setManagementList(List<ParkingBoy> managementList) {
-        this.managementList = managementList;
-    }
+public class ServiceManager{
+    private ArrayList<ParkingLot> parkingLotArrayList;
+    private List<ParkingBoy> managementList;
 
     public List<ParkingBoy> manageParkingBoys() {
         return this.managementList;
     }
 
-    //no need to pass ParkingBoy
-    public ParkingTicket assignParkingBoyToPark(Vehicle vehicle, ParkingBoy parkingBoy, ParkingLot parkingLot) throws ParkingSystemException {
-       //merge condition
-        if (isParkingBoyInList(parkingBoy)) {
-            if(isParkingLotOwnedByParkingBoy(parkingBoy, parkingLot)){
-                    return parkingBoy.parkCar(vehicle);
-                }
-            }
-        return null;
+    public ServiceManager(ParkingLot parkingLot) {
+        this.parkingLotArrayList = new ArrayList<>();
+        this.parkingLotArrayList.add(parkingLot);
     }
 
-    private boolean isParkingLotOwnedByParkingBoy(ParkingBoy parkingBoy, ParkingLot parkingLot) {
-        return parkingBoy.getParkingLot().stream()
-                .anyMatch(lot -> lot == parkingLot);
+    public ServiceManager setManagementList (List<ParkingBoy> managementList){
+        this.managementList = managementList;
+        return this;
     }
 
-    private boolean isParkingBoyInList(ParkingBoy parkingBoy) {
-        return managementList.stream()
-                .anyMatch(list -> list == parkingBoy);
+    public ServiceManager() {
+        this(new ParkingLot());
     }
 
-    public Vehicle assignParkBoyToFetch(ParkingTicket parkingTicket, ParkingBoy parkingBoy, ParkingLot parkingLot) throws ParkingSystemException {
-        if (isParkingBoyInList(parkingBoy)) {
-            if(isParkingLotOwnedByParkingBoy(parkingBoy, parkingLot)){
-                return parkingBoy.fetchCar(parkingTicket);
-            }
+    public ParkingTicket parkCar(Vehicle vehicle) {
+        if(vehicle == null){
+            throw new ParkingSystemException(MISSING_CAR);
         }
-        return null;
+
+        ParkingLot parkingLot = findAvailableParkingLot();
+        return ParkAndFetch.of()
+                .setParkingLot(parkingLot)
+                .parkCar(vehicle);
+    }
+
+    public ParkingLot findAvailableParkingLot() {
+        return parkingLotArrayList.stream()
+                .filter(parkingLot -> !parkingLot.isFull())
+                .findFirst()
+                .orElseThrow(() -> new ParkingSystemException(NOT_ENOUGH_POSITION));
+    }
+
+    public Vehicle fetchCar(ParkingTicket parkingTicket) {
+        return ParkAndFetch.of()
+                .setParkingLotList(parkingLotArrayList)
+                .fetchCar(parkingTicket);
     }
 }

@@ -12,33 +12,33 @@ public class ParkAndFetch {
 
     private ParkAndFetch() { }
 
-    public static ParkAndFetch of() {
+    static ParkAndFetch of() {
         return new ParkAndFetch();
     }
 
-    public ParkAndFetch setParkingLotList(List<ParkingLot> parkingLotArrayList) {
+    ParkAndFetch setParkingLotList(List<ParkingLot> parkingLotArrayList) {
         this.parkingLotArrayList = parkingLotArrayList;
         return this;
     }
 
-    public ParkAndFetch setParkingLot(ParkingLot parkingLot) {
+    ParkAndFetch setParkingLot(ParkingLot parkingLot) {
         this.parkingLot = parkingLot;
         return this;
     }
 
-    public ParkingTicket parkCar(Vehicle vehicle) throws ParkingSystemException {
+    ParkingTicket parkCar(Vehicle vehicle) {
         return parkingLot.issueTicket(vehicle);
     }
 
     public Vehicle fetchCar(ParkingTicket parkingTicket) {
         return parkingLotArrayList.stream()
-                .filter(parkingLot -> parkingLot.getTicketCarMap().containsKey(checkTicket(parkingTicket)))
-                .map(parkingLot -> parkingLot.getCar(parkingTicket))
+                .filter(lot -> lot.getTicketCarMap().containsKey(checkTicket(parkingTicket)))
+                .map(lot -> lot.getCar(parkingTicket))
                 .findFirst()
                 .orElseThrow(() -> new ParkingSystemException(UNRECOGNIZED_PARKING_TICKET));
     }
 
-    public ParkingTicket checkTicket(ParkingTicket parkingTicket) throws ParkingSystemException {
+    private ParkingTicket checkTicket(ParkingTicket parkingTicket) {
         return Optional.ofNullable(parkingTicket)
                 .orElseThrow(() -> new ParkingSystemException(PROVIDE_PARKING_TICKET));
     }

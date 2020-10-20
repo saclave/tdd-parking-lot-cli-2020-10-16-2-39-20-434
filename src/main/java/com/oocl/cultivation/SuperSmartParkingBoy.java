@@ -8,7 +8,7 @@ public class SuperSmartParkingBoy extends ParkingBoy {
     private List<ParkingLot> parkingLotArrayList;
 
     @Override
-    public ParkingLot findAvailableParkingLot() throws ParkingSystemException {
+    public ParkingLot findAvailableParkingLot() {
         return parkingLotArrayList.stream().reduce((parkingLot, parkingLot2) -> parkingLot.getAverageAvailableSlot() >
                 parkingLot2.getAverageAvailableSlot() ? parkingLot : parkingLot2)
                 .orElseThrow(() -> new ParkingSystemException(NOT_ENOUGH_POSITION));

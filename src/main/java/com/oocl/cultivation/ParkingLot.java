@@ -13,7 +13,6 @@ public class ParkingLot {
         this.ticketCarMap = new HashMap<>();
     }
 
-    //add constant name for default size
     public ParkingLot() {
         this.size = DEFAULT_SIZE;
         this.ticketCarMap = new HashMap<>();

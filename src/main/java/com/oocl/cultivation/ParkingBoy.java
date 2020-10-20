@@ -3,8 +3,7 @@ package com.oocl.cultivation;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.oocl.cultivation.ParkingSystemException.MISSING_CAR;
-import static com.oocl.cultivation.ParkingSystemException.NOT_ENOUGH_POSITION;
+import static com.oocl.cultivation.ParkingSystemException.*;
 
 public class ParkingBoy {
     private List<ParkingLot> parkingLotArrayList;
@@ -34,10 +33,6 @@ public class ParkingBoy {
                 .filter(parkingLot -> !parkingLot.isFull())
                 .findFirst()
                 .orElseThrow(() -> new ParkingSystemException(NOT_ENOUGH_POSITION));
-    }
-
-    public List<ParkingLot> getParkingLot() {
-        return parkingLotArrayList;
     }
 
     public Vehicle fetchCar(ParkingTicket parkingTicket) {
