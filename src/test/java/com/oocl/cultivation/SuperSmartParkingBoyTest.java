@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class SuperSmartParkingBoyTest {
 
     @Test
-    void when_super_smart_parking_boy_parks_multiple_cars_in_multiple_parking_lots() {
+    void when_super_smart_parking_boy_parks_cars_in_multiple_lots_and_gets_the_average_of_space_with_most_slots() {
         //Given
         ParkingLot parkingLot1 = new ParkingLot(2);
         ParkingLot parkingLot2 = new ParkingLot(3);
