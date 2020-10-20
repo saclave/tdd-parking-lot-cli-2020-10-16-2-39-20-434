@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class SmartParkingBoyTest {
 
     @Test
-    void when_smart_parking_boy_parks_multiple_cars_in_then_return_multiple_parking_lots_which_has_most_cases() {
+    void should_return_number_of_parked_cars_which_has_most_cases_when_smart_parking_boy_parks_multiple_cars() {
         //Given
         ParkingLot parkingLot1 = new ParkingLot(2);
         ParkingLot parkingLot2 = new ParkingLot(3);

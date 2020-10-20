@@ -3,6 +3,9 @@ package com.oocl.cultivation;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.oocl.cultivation.ParkingSystemException.MISSING_CAR;
+import static com.oocl.cultivation.ParkingSystemException.NOT_ENOUGH_POSITION;
+
 public class ParkingBoy {
     private List<ParkingLot> parkingLotArrayList;
 
@@ -16,11 +19,22 @@ public class ParkingBoy {
     }
 
     public ParkingTicket parkCar(Vehicle vehicle) throws ParkingSystemException {
+        if(vehicle == null){
+            throw new ParkingSystemException(MISSING_CAR);
+        }
+
+        ParkingLot parkingLot = findAvailableParkingLot();
         return ParkAndFetch.of()
-                .setParkingLotList(parkingLotArrayList)
+                .setParkingLot(parkingLot)
                 .parkCar(vehicle);
     }
 
+    public ParkingLot findAvailableParkingLot() throws ParkingSystemException {
+        return parkingLotArrayList.stream()
+                .filter(parkingLot -> !parkingLot.isFull())
+                .findFirst()
+                .orElseThrow(() -> new ParkingSystemException(NOT_ENOUGH_POSITION));
+    }
 
     public List<ParkingLot> getParkingLot() {
         return parkingLotArrayList;

@@ -5,31 +5,29 @@ import java.util.Optional;
 
 import static com.oocl.cultivation.ParkingSystemException.*;
 
-public abstract class ParkAndFetch {
+public class ParkAndFetch {
 
     private List<ParkingLot> parkingLotArrayList;
+    private ParkingLot parkingLot;
 
     private ParkAndFetch() { }
+
+    public static ParkAndFetch of() {
+        return new ParkAndFetch();
+    }
 
     public ParkAndFetch setParkingLotList(List<ParkingLot> parkingLotArrayList) {
         this.parkingLotArrayList = parkingLotArrayList;
         return this;
     }
 
-    public ParkingTicket parkCar(Vehicle vehicle) throws ParkingSystemException {
-        if(vehicle == null){
-            throw new RuntimeException();
-        }
-
-        ParkingLot parkingLot = findAvailableParkingLot();
-        return parkingLot.issueTicket(vehicle);
+    public ParkAndFetch setParkingLot(ParkingLot parkingLot) {
+        this.parkingLot = parkingLot;
+        return this;
     }
 
-    public ParkingLot findAvailableParkingLot() throws ParkingSystemException {
-        return parkingLotArrayList.stream()
-                .filter(parkingLot -> !parkingLot.isFull())
-                .findFirst()
-                .orElseThrow(() -> new ParkingSystemException(NOT_ENOUGH_POSITION));
+    public ParkingTicket parkCar(Vehicle vehicle) throws ParkingSystemException {
+        return parkingLot.issueTicket(vehicle);
     }
 
     public Vehicle fetchCar(ParkingTicket parkingTicket) {
@@ -45,5 +43,4 @@ public abstract class ParkAndFetch {
                 .orElseThrow(() -> new ParkingSystemException(PROVIDE_PARKING_TICKET));
     }
 
-    public abstract void setParkingLotArrayList(List<ParkingLot> parkingLotArrayList);
 }
