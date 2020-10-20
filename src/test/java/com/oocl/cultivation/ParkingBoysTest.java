@@ -19,7 +19,7 @@ class ParkingBoysTest {
     void setup(){
         vehicle = new Vehicle();
         parkingLot = new ParkingLot();
-        parkingTicket = new ParkingTicket(true, false);
+        parkingTicket = new ParkingTicket();
     }
 
     @Test
@@ -67,7 +67,7 @@ class ParkingBoysTest {
             //given
         parkingBoy = new ParkingBoy(parkingLot);
         //when
-        parkingBoy.fetchCar(new ParkingTicket(true, false));
+        parkingBoy.fetchCar(new ParkingTicket());
         });
     }
 
@@ -129,7 +129,7 @@ class ParkingBoysTest {
         assertThrows(ParkingSystemException.class, () -> {
             //given
         parkingBoy = new ParkingBoy(parkingLot);
-        parkingTicket = new ParkingTicket(true, false);
+        parkingTicket = new ParkingTicket();
 
         //when
         parkingBoy.checkTicket(parkingTicket);
@@ -186,8 +186,8 @@ class ParkingBoysTest {
             }
         });
 
-        int actual1 = parkingLot1.getNumberOfParkedCars().size();
-        int actual2 = parkingLot2.getNumberOfParkedCars().size();
+        int actual1 = parkingLot1.getTicketCarMap().size();
+        int actual2 = parkingLot2.getTicketCarMap().size();
         //then
         assertEquals(2, actual1);
         assertEquals(1, actual2);
@@ -212,8 +212,8 @@ class ParkingBoysTest {
                 e.printStackTrace();
             }
         });
-        int actual1 = parkingLot1.getNumberOfParkedCars().size();
-        int actual2 = parkingLot2.getNumberOfParkedCars().size();
+        int actual1 = parkingLot1.getTicketCarMap().size();
+        int actual2 = parkingLot2.getTicketCarMap().size();
         //then
         assertEquals(1, actual1);
         assertEquals(2, actual2);
@@ -238,8 +238,8 @@ class ParkingBoysTest {
                 e.printStackTrace();
             }
         });
-        int actual1 = parkingLot1.getNumberOfParkedCars().size();
-        int actual2 = parkingLot2.getNumberOfParkedCars().size();
+        int actual1 = parkingLot1.getTicketCarMap().size();
+        int actual2 = parkingLot2.getTicketCarMap().size();
         //then
         assertEquals(1, actual1);
         assertEquals(2, actual2);

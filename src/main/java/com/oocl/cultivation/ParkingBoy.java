@@ -20,21 +20,14 @@ public class ParkingBoy {
     //create util
     public ParkingTicket parkCar(Vehicle vehicle) throws ParkingSystemException {
         ParkingLot parkingLot = findAvailableParkingLot();
-        if (parkingLot == null) {
-            throw new ParkingSystemException(NOT_ENOUGH_POSITION);
-        }
-       ParkingTicket parkingTicket = parkingLot.issueTicket(vehicle);
-
-        return parkingTicket;
+        return parkingLot.issueTicket(vehicle);
     }
 
     public ParkingLot findAvailableParkingLot() throws ParkingSystemException {
-        for(ParkingLot parkingLot : parkingLotArrayList){
-            if(!parkingLot.isFull()){
-                return parkingLot;
-            }
-        }
-        return null;
+        return parkingLotArrayList.stream()
+                .filter(parkingLot -> !parkingLot.isFull())
+                .findFirst()
+                .orElseThrow(() -> new ParkingSystemException(NOT_ENOUGH_POSITION));
     }
 
     public List<ParkingLot> getParkingLot() {

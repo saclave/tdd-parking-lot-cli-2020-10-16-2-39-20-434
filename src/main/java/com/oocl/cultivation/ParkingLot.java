@@ -26,7 +26,7 @@ public class ParkingLot {
         ParkingTicket parkingTicket = new ParkingTicket();
 
         ticketCarMap.put(parkingTicket, vehicle);
-        return getAvailableParkingLotSpace() >= 0 ? parkingTicket : null;
+        return parkingTicket;
     }
 
 
@@ -54,7 +54,7 @@ public class ParkingLot {
         return getAvailableParkingLotSpace() / size * 100;
     }
 
-    Map<ParkingTicket, Vehicle> getNumberOfParkedCars() {
+    Map<ParkingTicket, Vehicle> getTicketCarMap() {
         return ticketCarMap;
     }
     //return ticket map size

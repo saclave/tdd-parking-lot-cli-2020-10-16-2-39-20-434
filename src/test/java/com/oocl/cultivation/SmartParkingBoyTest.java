@@ -29,8 +29,8 @@ public class SmartParkingBoyTest {
                 e.printStackTrace();
             }
         });
-        int actual1 = parkingLot1.getNumberOfParkedCars().size();
-        int actual2 = parkingLot2.getNumberOfParkedCars().size();
+        int actual1 = parkingLot1.getTicketCarMap().size();
+        int actual2 = parkingLot2.getTicketCarMap().size();
         //then
         assertEquals(1, actual1);
         assertEquals(2, actual2);
