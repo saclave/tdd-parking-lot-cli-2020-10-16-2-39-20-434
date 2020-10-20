@@ -63,6 +63,7 @@ public class ServiceManagerTest {
         parkingBoy1.setMultipleParkingLots(new ArrayList<>(asList(parkingLot1, parkingLot2, parkingLot3)));
         parkingBoy2.setMultipleParkingLots(new ArrayList<>(asList(parkingLot1)));
         serviceManager.setManagementList(parkingBoyArrayList);
+        //change this method
         ParkingTicket parkingTicket = serviceManager.assignParkingBoyToPark(vehicle, parkingBoy1, parkingLot1);
 
         //then

@@ -6,12 +6,9 @@ import java.util.List;
 import static com.oocl.cultivation.ParkingSystemException.*;
 
 public class ParkingBoy {
-    public ParkingLot parkingLot;
-    public ParkingTicket parkingTicket;
     private List<ParkingLot> parkingLotArrayList;
 
     public ParkingBoy(ParkingLot parkingLot) {
-        this.parkingLot = parkingLot;
         this.parkingLotArrayList = new ArrayList<>();
         this.parkingLotArrayList.add(parkingLot);
     }
@@ -20,12 +17,13 @@ public class ParkingBoy {
         this(new ParkingLot());
     }
 
+    //create util
     public ParkingTicket parkCar(Vehicle vehicle) throws ParkingSystemException {
-        parkingLot = findAvailableParkingLot();
+        ParkingLot parkingLot = findAvailableParkingLot();
         if (parkingLot == null) {
             throw new ParkingSystemException(NOT_ENOUGH_POSITION);
         }
-        parkingTicket = parkingLot.issueTicket(vehicle);
+       ParkingTicket parkingTicket = parkingLot.issueTicket(vehicle);
 
         return parkingTicket;
     }
@@ -43,9 +41,11 @@ public class ParkingBoy {
         return parkingLotArrayList;
     }
 
+    //create util
     public Vehicle fetchCar(ParkingTicket parkingTicket) throws ParkingSystemException {
         checkTicket(parkingTicket);
         for(ParkingLot parkingLot : parkingLotArrayList){
+            //just use size of the map
             for(Vehicle vehicle : parkingLot.getCarList()){
                 vehicle = parkingLot.getCar(parkingTicket);
                 return vehicle;
@@ -63,6 +63,7 @@ public class ParkingBoy {
             throw new ParkingSystemException(UNRECOGNIZED_PARKING_TICKET);
         }
     }
+    //merge exceptions
 
     public ParkingBoy setMultipleParkingLots(List<ParkingLot> parkingLotArrayList) {
         this.parkingLotArrayList = parkingLotArrayList;

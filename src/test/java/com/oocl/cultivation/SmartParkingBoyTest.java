@@ -10,6 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class SmartParkingBoyTest {
 
+    //change case name  to which has most spaces
     @Test
     void when_smart_parking_boy_parks_multiple_cars_in_multiple_parking_lots() {
         //Given

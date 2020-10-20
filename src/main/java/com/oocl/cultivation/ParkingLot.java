@@ -6,30 +6,29 @@ import java.util.List;
 import java.util.Map;
 
 public class ParkingLot {
-    private List<Vehicle> vehicleArrayList;
+    private static final int DEFAULT_SIZE = 10;
     private int size;
     private Map<ParkingTicket, Vehicle> ticketCarMap = new HashMap<>();
 
     public ParkingLot(int size) {
-        this.vehicleArrayList = new ArrayList<>();
         this.size = size;
+        this.ticketCarMap = new HashMap<>();
     }
 
+    //add constant name for default size
     public ParkingLot() {
-        this(10);
+        this.size = DEFAULT_SIZE;
+        this.ticketCarMap = new HashMap<>();
     }
 
     public ParkingTicket issueTicket(Vehicle vehicle) {
-        ParkingTicket parkingTicket = new ParkingTicket(true, false);
+        //check car has been fetched instead from map
+        ParkingTicket parkingTicket = new ParkingTicket();
 
         ticketCarMap.put(parkingTicket, vehicle);
-        parkCar(vehicle);
         return getAvailableParkingLotSpace() >= 0 ? parkingTicket : null;
     }
 
-    private void parkCar(Vehicle vehicle) {
-        vehicleArrayList.add(vehicle);
-    }
 
     private int getAvailableParkingLotSpace() {
         return size - ticketCarMap.size();
@@ -38,13 +37,9 @@ public class ParkingLot {
     public Vehicle getCar(ParkingTicket parkingTicket) {
         Vehicle vehicle = ticketCarMap.get(parkingTicket);
         ticketCarMap.remove(parkingTicket);
-        removeCar(vehicle);
         return vehicle;
     }
 
-    private void removeCar(Vehicle vehicle) {
-        vehicleArrayList.remove(vehicle);
-    }
 
     public boolean isFull() {
         return ticketCarMap.size() >= size;
@@ -54,9 +49,6 @@ public class ParkingLot {
         return size - ticketCarMap.size();
     }
 
-    public List<Vehicle> getCarList() {
-        return vehicleArrayList;
-    }
 
     public int getAverageAvailableSlot() {
         return getAvailableParkingLotSpace() / size * 100;
@@ -65,4 +57,5 @@ public class ParkingLot {
     Map<ParkingTicket, Vehicle> getNumberOfParkedCars() {
         return ticketCarMap;
     }
+    //return ticket map size
 }
