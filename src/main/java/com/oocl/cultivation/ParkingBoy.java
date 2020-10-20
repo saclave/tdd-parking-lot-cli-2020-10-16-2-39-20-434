@@ -2,6 +2,7 @@ package com.oocl.cultivation;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static com.oocl.cultivation.ParkingSystemException.*;
 
@@ -36,25 +37,23 @@ public class ParkingBoy {
 
     //create util
     public Vehicle fetchCar(ParkingTicket parkingTicket) throws ParkingSystemException {
-        checkTicket(parkingTicket);
-        for(ParkingLot parkingLot : parkingLotArrayList){
-            //just use size of the map
-            for(Vehicle vehicle : parkingLot.getCarList()){
-                vehicle = parkingLot.getCar(parkingTicket);
-                return vehicle;
-            }
-        }
-        throw new ParkingSystemException(UNRECOGNIZED_PARKING_TICKET);
+        return parkingLotArrayList.stream()
+                .filter(parkingLot -> {
+                    try {
+                        return parkingLot.getTicketCarMap().containsKey(checkTicket(parkingTicket));
+                    } catch (ParkingSystemException e) {
+                        e.printStackTrace();
+                    }
+                    return false;
+                })
+                .map(parkingLot -> parkingLot.getCar(parkingTicket))
+                .findFirst()
+                .orElseThrow(() -> new ParkingSystemException(UNRECOGNIZED_PARKING_TICKET));
     }
 
-    public void checkTicket(ParkingTicket parkingTicket) throws ParkingSystemException {
-        if (parkingTicket == null) {
-            throw new ParkingSystemException(PROVIDE_PARKING_TICKET);
-        } else if (parkingTicket.isProvided() && parkingTicket.isUsed()) {
-            throw new ParkingSystemException(UNRECOGNIZED_PARKING_TICKET);
-        } else if (!parkingTicket.isProvided() && parkingTicket.isUsed()) {
-            throw new ParkingSystemException(UNRECOGNIZED_PARKING_TICKET);
-        }
+    public ParkingTicket checkTicket(ParkingTicket parkingTicket) throws ParkingSystemException {
+        return Optional.ofNullable(parkingTicket)
+                .orElseThrow(() -> new ParkingSystemException(PROVIDE_PARKING_TICKET));
     }
     //merge exceptions
 
