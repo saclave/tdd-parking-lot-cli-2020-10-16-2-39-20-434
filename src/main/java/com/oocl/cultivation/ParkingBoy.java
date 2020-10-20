@@ -2,9 +2,6 @@ package com.oocl.cultivation;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-
-import static com.oocl.cultivation.ParkingSystemException.*;
 
 public class ParkingBoy {
     private List<ParkingLot> parkingLotArrayList;
@@ -18,39 +15,21 @@ public class ParkingBoy {
         this(new ParkingLot());
     }
 
-    //create util
     public ParkingTicket parkCar(Vehicle vehicle) throws ParkingSystemException {
-        if(vehicle == null){
-            throw new RuntimeException();
-        }
-
-        ParkingLot parkingLot = findAvailableParkingLot();
-        return parkingLot.issueTicket(vehicle);
+        return ParkAndFetch.of()
+                .setParkingLotList(parkingLotArrayList)
+                .parkCar(vehicle);
     }
 
-    public ParkingLot findAvailableParkingLot() throws ParkingSystemException {
-        return parkingLotArrayList.stream()
-                .filter(parkingLot -> !parkingLot.isFull())
-                .findFirst()
-                .orElseThrow(() -> new ParkingSystemException(NOT_ENOUGH_POSITION));
-    }
 
     public List<ParkingLot> getParkingLot() {
         return parkingLotArrayList;
     }
 
-    //create util
     public Vehicle fetchCar(ParkingTicket parkingTicket) {
-        return parkingLotArrayList.stream()
-                .filter(parkingLot -> parkingLot.getTicketCarMap().containsKey(checkTicket(parkingTicket)))
-                .map(parkingLot -> parkingLot.getCar(parkingTicket))
-                .findFirst()
-                .orElseThrow(() -> new ParkingSystemException(UNRECOGNIZED_PARKING_TICKET));
-    }
-
-    public ParkingTicket checkTicket(ParkingTicket parkingTicket) throws ParkingSystemException {
-        return Optional.ofNullable(parkingTicket)
-                .orElseThrow(() -> new ParkingSystemException(PROVIDE_PARKING_TICKET));
+        return ParkAndFetch.of()
+                .setParkingLotList(parkingLotArrayList)
+                .fetchCar(parkingTicket);
     }
 
     public ParkingBoy setMultipleParkingLots(List<ParkingLot> parkingLotArrayList) {

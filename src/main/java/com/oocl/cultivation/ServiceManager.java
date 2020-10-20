@@ -3,7 +3,7 @@ package com.oocl.cultivation;
 import java.util.List;
 
 //remove inheritance + use park&fetch Util
-public class ServiceManager extends ParkingBoy{
+public abstract class ServiceManager extends ParkingBoy{
     private List<ParkingBoy> managementList;
 
     public void setManagementList(List<ParkingBoy> managementList) {

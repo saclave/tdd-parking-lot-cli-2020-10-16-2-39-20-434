@@ -97,61 +97,6 @@ public class ServiceManagerTest {
         //then
         assertNotNull(serviceManager.parkCar(vehicle));
     }
-
-    @Test
-    void when_park_of_parking_boy_throw_error_from_wrong_ticket(){
-        //then
-        assertThrows(ParkingSystemException.class, () -> {
-            //given
-            parkingLot1 = new ParkingLot(1);
-            parkingLot2 = new ParkingLot(2);
-            parkingLot3 = new ParkingLot(3);
-            ArrayList<ParkingBoy> parkingBoyArrayList = new ArrayList<>(asList
-                    (parkingBoy1, parkingBoy2, parkingBoy3));
-
-            //when
-            parkingBoy1.setMultipleParkingLots(new ArrayList<>(asList(parkingLot1, parkingLot2, parkingLot3)));
-            parkingBoy2.setMultipleParkingLots(new ArrayList<>(asList(parkingLot1)));
-            serviceManager.setManagementList(parkingBoyArrayList);
-            ParkingTicket parkingTicket = new ParkingTicket();
-            serviceManager.assignParkBoyToFetch(parkingTicket, parkingBoy2, parkingLot1);
-        });
-    }
-
-    @Test
-    void when_parking_lot_capacity_is_1_when_car_is_parked_already_throw_error() {
-        //then
-        assertThrows(ParkingSystemException.class, () -> {
-            //given
-            parkingLot1 = new ParkingLot(1);
-            ArrayList<ParkingBoy> parkingBoyArrayList = new ArrayList<>(asList
-                    (parkingBoy1, parkingBoy2, parkingBoy3));
-
-            //when
-            parkingBoy1.setMultipleParkingLots(new ArrayList<>(asList(parkingLot1)));
-            serviceManager.setMultipleParkingLots(new ArrayList<>(asList(parkingLot1)));
-            serviceManager.setManagementList(parkingBoyArrayList);
-
-            serviceManager.assignParkingBoyToPark(vehicle, parkingBoy1, parkingLot1);
-            serviceManager.parkCar(vehicle);
-        });
-    }
-
-    @Test
-    void when_no_ticket_provided_throw_error(){
-        //then
-        assertThrows(ParkingSystemException.class, () -> {
-            //given
-            parkingLot1 = new ParkingLot(1);
-            ArrayList<ParkingBoy> parkingBoyArrayList = new ArrayList<>(asList
-                    (parkingBoy1, parkingBoy2, parkingBoy3));
-
-            //when
-            parkingBoy1.setMultipleParkingLots(new ArrayList<>(asList(parkingLot1)));
-            serviceManager.setManagementList(parkingBoyArrayList);
-
-            serviceManager.assignParkBoyToFetch(null, parkingBoy1, parkingLot1);
-        });
-    }
+    
 }
 
