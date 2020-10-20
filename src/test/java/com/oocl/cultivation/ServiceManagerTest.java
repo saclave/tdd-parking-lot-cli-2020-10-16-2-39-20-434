@@ -34,7 +34,7 @@ public class ServiceManagerTest {
     }
 
     @Test
-    void when_to_specify_which_parking_boy_can_park_car_by_service_manager() throws ParkingSystemException {
+    void when_to_specify_which_parking_boy_can_park_car_by_service_manager_then_return_ticket_from_parking_boy() throws ParkingSystemException {
         //given
         parkingLot1 = new ParkingLot(1);
         parkingLot2 = new ParkingLot(2);
@@ -51,7 +51,7 @@ public class ServiceManagerTest {
     }
 
     @Test
-    void when_to_specify_which_parking_boy_can_fetch_car_by_service_manager() throws ParkingSystemException {
+    void when_to_specify_which_parking_boy_can_fetch_car_by_service_manager_then_return_car_from_parking_boy() throws ParkingSystemException {
         //given
         parkingLot1 = new ParkingLot(1);
         parkingLot2 = new ParkingLot(2);
@@ -71,7 +71,7 @@ public class ServiceManagerTest {
     }
 
     @Test
-    void when_service_manager_give_no_ticket_if_parking_boy_to_park_is_not_in_management_list() throws ParkingSystemException {
+    void when_service_manager_give_no_ticket_if_parking_boy_to_park_is_not_in_management_list_then_return_null() throws ParkingSystemException {
         //given
         parkingLot1 = new ParkingLot(1);
         ArrayList<ParkingBoy> parkingBoyArrayList = new ArrayList<>(asList
@@ -86,7 +86,7 @@ public class ServiceManagerTest {
     }
 
     @Test
-    void when_park_car_by_service_manager_from_managed_parking_lot() throws ParkingSystemException {
+    void when_park_car_by_service_manager_from_managed_parking_lot_then_return_ticket_for_service_manager() throws ParkingSystemException {
         //given
         parkingLot1 = new ParkingLot(1);
         parkingLot2 = new ParkingLot(2);
@@ -97,6 +97,6 @@ public class ServiceManagerTest {
         //then
         assertNotNull(serviceManager.parkCar(vehicle));
     }
-    
+
 }
 
