@@ -7,11 +7,6 @@ import static com.oocl.cultivation.ParkingSystemException.NOT_ENOUGH_POSITION;
 public class SuperSmartParkingBoy extends ParkingBoy {
     private List<ParkingLot> parkingLotArrayList;
 
-    //delete constructor and use list
-    public SuperSmartParkingBoy(ParkingLot parkingLot) {
-        super(parkingLot);
-    }
-
     @Override
     public ParkingLot findAvailableParkingLot() throws ParkingSystemException {
         return parkingLotArrayList.stream().reduce((parkingLot, parkingLot2) -> parkingLot.getAverageAvailableSlot() >

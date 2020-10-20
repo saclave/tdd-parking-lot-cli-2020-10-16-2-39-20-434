@@ -15,8 +15,8 @@ public class SmartParkingBoyTest {
         //Given
         ParkingLot parkingLot1 = new ParkingLot(2);
         ParkingLot parkingLot2 = new ParkingLot(3);
-        SmartParkingBoy smartParkingBoy = new SmartParkingBoy(new ParkingLot());
         ArrayList<ParkingLot> parkingLotArrayList = new ArrayList<>(asList(parkingLot1, parkingLot2));
+        SmartParkingBoy smartParkingBoy = new SmartParkingBoy();
 
         //when
         smartParkingBoy.setParkingLotArrayList(parkingLotArrayList);

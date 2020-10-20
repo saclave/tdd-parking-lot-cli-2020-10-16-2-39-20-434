@@ -35,7 +35,6 @@ public class ServiceManager extends ParkingBoy{
                 .anyMatch(list -> list == parkingBoy);
     }
 
-    //merge condition
     public Vehicle assignParkBoyToFetch(ParkingTicket parkingTicket, ParkingBoy parkingBoy, ParkingLot parkingLot) throws ParkingSystemException {
         if (isParkingBoyInList(parkingBoy)) {
             if(isParkingLotOwnedByParkingBoy(parkingBoy, parkingLot)){

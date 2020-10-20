@@ -52,7 +52,6 @@ public class ParkingBoy {
         return Optional.ofNullable(parkingTicket)
                 .orElseThrow(() -> new ParkingSystemException(PROVIDE_PARKING_TICKET));
     }
-    //merge exceptions
 
     public ParkingBoy setMultipleParkingLots(List<ParkingLot> parkingLotArrayList) {
         this.parkingLotArrayList = parkingLotArrayList;

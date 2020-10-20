@@ -22,7 +22,6 @@ public class ParkingLot {
     }
 
     public ParkingTicket issueTicket(Vehicle vehicle) {
-        //check car has been fetched instead from map
         ParkingTicket parkingTicket = new ParkingTicket();
 
         ticketCarMap.put(parkingTicket, vehicle);
@@ -57,5 +56,4 @@ public class ParkingLot {
     Map<ParkingTicket, Vehicle> getTicketCarMap() {
         return ticketCarMap;
     }
-    //return ticket map size
 }
