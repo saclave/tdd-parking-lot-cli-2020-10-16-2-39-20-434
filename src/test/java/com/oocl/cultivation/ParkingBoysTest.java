@@ -73,13 +73,14 @@ class ParkingBoysTest {
 
     @Test
     void when_no_ticket_return_null_car() throws ParkingSystemException {
+        //then
+        assertThrows(RuntimeException.class, () -> {
         //given
         parkingBoy = new ParkingBoy(parkingLot);
         //when
         parkingTicket = parkingBoy.parkCar(null);
-        Vehicle fetchVehicle = parkingBoy.fetchCar(parkingTicket);
-        //then
-        assertNull(fetchVehicle);
+        parkingBoy.fetchCar(parkingTicket);
+        });
     }
 
     @Test

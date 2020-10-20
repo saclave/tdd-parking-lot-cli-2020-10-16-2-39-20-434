@@ -20,6 +20,10 @@ public class ParkingBoy {
 
     //create util
     public ParkingTicket parkCar(Vehicle vehicle) throws ParkingSystemException {
+        if(vehicle == null){
+            throw new RuntimeException();
+        }
+
         ParkingLot parkingLot = findAvailableParkingLot();
         return parkingLot.issueTicket(vehicle);
     }
@@ -36,16 +40,9 @@ public class ParkingBoy {
     }
 
     //create util
-    public Vehicle fetchCar(ParkingTicket parkingTicket) throws ParkingSystemException {
+    public Vehicle fetchCar(ParkingTicket parkingTicket) {
         return parkingLotArrayList.stream()
-                .filter(parkingLot -> {
-                    try {
-                        return parkingLot.getTicketCarMap().containsKey(checkTicket(parkingTicket));
-                    } catch (ParkingSystemException e) {
-                        e.printStackTrace();
-                    }
-                    return false;
-                })
+                .filter(parkingLot -> parkingLot.getTicketCarMap().containsKey(checkTicket(parkingTicket)))
                 .map(parkingLot -> parkingLot.getCar(parkingTicket))
                 .findFirst()
                 .orElseThrow(() -> new ParkingSystemException(UNRECOGNIZED_PARKING_TICKET));
